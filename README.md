@@ -20,7 +20,7 @@ Works with Claude Code, Cursor, Windsurf, and other AI development tools. Use th
 
 ```bash
 # Add all AI agent rules to your project
-git subtree add --prefix=ai-rules https://github.com/username/rwest.ai.rules.git main --squash
+git subtree add --prefix=ai-rules https://github.com/BrandonABarringer/bb.ai.rules main --squash
 ```
 
 **Why include everything?**
@@ -37,9 +37,9 @@ If you prefer selective integration:
 
 ```bash
 # Add specific categories only
-git subtree add --prefix=ai-rules/behavioral https://github.com/username/rwest.ai.rules.git behavioral --squash
-git subtree add --prefix=ai-rules/coding https://github.com/username/rwest.ai.rules.git coding --squash
-git subtree add --prefix=ai-rules/contextual https://github.com/username/rwest.ai.rules.git contextual --squash
+git subtree add --prefix=ai-rules/behavioral https://github.com/BrandonABarringer/bb.ai.rules behavioral --squash
+git subtree add --prefix=ai-rules/coding https://github.com/BrandonABarringer/bb.ai.rules coding --squash
+git subtree add --prefix=ai-rules/contextual https://github.com/BrandonABarringer/bb.ai.rules contextual --squash
 ```
 
 ### Update Rules
