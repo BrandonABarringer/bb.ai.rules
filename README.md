@@ -49,11 +49,12 @@ git subtree pull --prefix=ai-rules/behavioral https://github.com/username/rwest.
 ```
 
 ### Project Integration
-1. Copy `templates/cross-platform-rules.md` to your project root
-2. Rename/symlink as needed:
-   - `CLAUDE.md` (Claude Code)
-   - `.cursorrules` (Cursor)
-   - `.windsurf/rules.md` (Windsurf)
+1. Copy `templates/cross-platform-rules.md` to your project
+2. Configure for your AI tools:
+   - **Claude Code**: Copy as `CLAUDE.md` in project root
+   - **Cursor (Modern)**: Copy as `.cursor/rules/project-rules.mdc` 
+   - **Cursor (Legacy)**: Copy as `.cursorrules` in project root (deprecated)
+   - **Windsurf**: Copy as `.windsurf/rules.md`
 3. Pull relevant rule categories via git subtree
 
 ## Component Architecture Standards

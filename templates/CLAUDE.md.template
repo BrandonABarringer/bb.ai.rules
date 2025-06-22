@@ -59,4 +59,9 @@ Follow the established patterns:
 ## Integration Notes
 - Rules integrated via: `git subtree add --prefix=ai-rules [repo-url] main --squash`
 - Update rules with: `git subtree pull --prefix=ai-rules [repo-url] main --squash`
-- This file works with Claude Code, Cursor, Windsurf, and other AI tools
+
+**AI Tool Setup:**
+- **Claude Code**: Use this file as `CLAUDE.md` (auto-loads)
+- **Cursor (Modern)**: Copy as `.cursor/rules/project-rules.mdc`
+- **Cursor (Legacy)**: Copy as `.cursorrules` (deprecated)
+- **Windsurf**: Copy as `.windsurf/rules.md`

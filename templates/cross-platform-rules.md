@@ -16,11 +16,25 @@ All components across frameworks should:
 - Be self-contained and data-driven
 
 ## Integration Notes
-This file works with:
-- **Claude Code**: Auto-loads as CLAUDE.md
-- **Cursor**: Auto-loads as .cursorrules  
-- **Windsurf**: Include in .windsurf/ directory
-- **Other AI tools**: Reference manually
+This file works with multiple AI development tools:
+
+### **Claude Code**
+- Copy this file as `CLAUDE.md` in project root (auto-loads)
+
+### **Cursor (Modern - Recommended)**
+- Create `.cursor/rules/` directory
+- Copy this file as `.cursor/rules/project-rules.mdc`
+- Enable Project Rules in Cursor settings
+
+### **Cursor (Legacy - Deprecated)**
+- Copy this file as `.cursorrules` in project root
+- Will be removed in future Cursor versions
+
+### **Windsurf**
+- Copy this file to `.windsurf/rules.md`
+
+### **Other AI Tools**
+- Reference this file manually as needed
 
 ## Rule Updates
 Rules are managed via git subtree from the central mono repo. Update with:
