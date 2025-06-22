@@ -1,5 +1,4 @@
 ---
-version: "1.0"
 category: "contextual"
 applies_to: ["claude", "gpt", "generic"]
 role: "frontend-developer"

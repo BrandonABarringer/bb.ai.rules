@@ -1,5 +1,4 @@
 ---
-version: "1.0"
 category: "coding"
 applies_to: ["claude", "gpt", "generic"]
 framework: "react"

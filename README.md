@@ -70,7 +70,6 @@ All rules use Markdown with YAML frontmatter:
 
 ```markdown
 ---
-version: "1.0"
 category: "behavioral|coding|contextual"
 applies_to: ["claude", "gpt", "generic"]
 ---
@@ -86,6 +85,4 @@ When this applies
 What to do
 ```
 
-## Versioning
-
-Rules use semantic versioning in YAML frontmatter. Update consuming projects when ready to adopt new rule versions.
+Rules are kept simple and self-contained. Use git commit history to track changes and updates.
