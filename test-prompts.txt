@@ -1,0 +1,8 @@
+/project:feature-proposal
+
+  ---
+  Post-Execution Validation Prompt:
+
+  Ok. This was a test to see how you worked through that slash command. Validate the steps you
+  took vs the checklist in @feature-proposal-command-validation-checklist.txt and see how your
+  process compares and contrasts to it to find holes in our command
