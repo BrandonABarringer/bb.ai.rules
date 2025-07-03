@@ -2,7 +2,7 @@
 
 ---
 type: feature
-status: todo
+status: in_progress
 area: command-validation
 ---
 
@@ -14,7 +14,16 @@ This baseline test will verify that our changes to the brainstorm command don't 
 
 The test must use a realistic topic that will exercise all aspects of the brainstorm workflow including codebase analysis, external research, and proper handoff preparation.
 
+**GIT FLOW REQUIREMENTS:**
+This task must be executed on a dedicated feature branch following our git flow strategy. All work, outputs, and validation results will be committed to the branch before merging successful results to main.
+
 ## Tasks
+**GIT FLOW SETUP:**
+- [ ] Create feature branch: `git checkout -b testing/task-01-enhanced-brainstorm`
+- [ ] Verify branch creation: `git branch` (should show current branch)
+- [ ] Update Scopecraft task with branch info in log
+
+**BASELINE TESTING:**
 - [ ] Select appropriate test topic for brainstorming (AI-powered code review automation system)
 - [ ] Execute `/project:brainstorm AI-powered code review automation system` command
 - [ ] Verify standardized module reference pattern usage during execution
@@ -26,6 +35,13 @@ The test must use a realistic topic that will exercise all aspects of the brains
 - [ ] Verify Integration section follows standardized "Command Transition" format
 - [ ] Confirm output file creation in correct directory structure
 - [ ] Document any deviations from expected behavior or patterns
+
+**GIT FLOW COMPLETION:**
+- [ ] Commit all outputs and findings: `git add . && git commit -m "Task 01: Execute enhanced brainstorm - baseline testing complete"`
+- [ ] Review validation results and determine success/failure
+- [ ] If successful: Prepare for merge to main
+- [ ] If issues found: Document thoroughly and keep branch for analysis
+- [ ] Update Scopecraft task status with git branch outcome
 
 ## Deliverable
 Successfully executed brainstorm command output with:
@@ -39,3 +55,4 @@ Successfully executed brainstorm command output with:
 - Baseline performance assessment for comparison with original workflow
 
 ## Log
+- 2025-07-03: Branch created: testing/task-01-enhanced-brainstorm. Beginning baseline test execution of enhanced brainstorm command.

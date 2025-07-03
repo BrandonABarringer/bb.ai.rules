@@ -15,6 +15,12 @@ This validation is the critical success measure for our entire improvement effor
 The validation must be thorough and objective, documenting both successes and any remaining gaps.
 
 ## Tasks
+**GIT FLOW SETUP:**
+- [ ] Continue on testing/task-03-enhanced-feature-proposal branch
+- [ ] Verify feature-proposal output is ready for validation
+- [ ] Update Scopecraft task with validation approach
+
+**COMPREHENSIVE VALIDATION:**
 - [ ] Access feature-proposal-command-validation-checklist.txt from project root
 - [ ] Execute complete step-by-step validation against all checklist criteria:
   - [ ] Command Input Validation
@@ -37,6 +43,12 @@ The validation must be thorough and objective, documenting both successes and an
 - [ ] Document any remaining critical failure points
 - [ ] Assess whether 85+ point pass criteria is achieved
 - [ ] Create detailed gap analysis for any remaining issues
+
+**GIT FLOW COMPLETION:**
+- [ ] Commit validation results: `git add . && git commit -m "Task 04: Feature-proposal validation complete - Score: [XX]/100"`
+- [ ] If score ≥85: Prepare successful merge to main
+- [ ] If score <85: Document gaps and prepare improvement branch
+- [ ] Update Scopecraft task with final validation score and decision
 
 ## Deliverable
 Comprehensive feature-proposal validation report including:
