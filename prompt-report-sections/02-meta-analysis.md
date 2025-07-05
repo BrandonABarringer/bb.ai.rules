@@ -2,2316 +2,549 @@
 
 ## 2.1 Systematic Review Process
 
-3,677 from arXiv 2,087 from SS, 639 from ACL = 4797 Records
+**Figure 2.1: PRISMA Systematic Literature Review Process**
 
--550
+```mermaid
+flowchart TD
+    A[3,677 from arXiv<br/>2,087 from SS<br/>639 from ACL<br/>= 4,797 Records] --> B[4,247 Records after<br/>Title Deduplication<br/>-550 duplicates]
+    B --> C[3,931 Records after<br/>Human Review<br/>1,661 papers reviewed<br/>-316 excluded]
+    C --> D[2,352 Records after removing<br/>papers that don't contain<br/>the word 'prompt'<br/>-1,579 excluded]
+    D --> E[1,565 records included<br/>in quantitative analysis<br/>1,071 papers AI reviewed<br/>-787 excluded]
+```
 
-In order to robustly collect a dataset of sources
+Figure 2.1: The PRISMA systematic literature review process. We accumulate 4,247 unique records from which we extract 1,565 relevant records. 
 
-for this paper, we ran a systematic literature re-
-
-4,247 Records after Title 
-
-1,661 papers human reviewed
-
-Deduplication
-
-view grounded in the PRISMA process (Page et al., 
-
-2021) (Figure 2.1). We host this dataset on Hug-
-
--316
-
-316 papers excluded
-
-gingFace 4 and present a datasheet (Gebru et al., 
-
-2021) for the dataset in Appendix A.3. Our main 3,931 Records after Human 
-
-Check if paper contains the 
-
-Review
-
-word "prompt" 
-
-data sources were arXiv, Semantic Scholar, and
-
-ACL. We query these databases with a list of
-
--1,579
-
-1,579 papers excluded
-
-44 keywords narrowly related to prompting and
-
-prompt engineering (Appendix A.4). 
-
-2,352 Records after 
-
-removing papers that don't 
-
-1,071 papers AI reviewed
-
-contain the word "prompt" 
+In order to robustly collect a dataset of sources for this paper, we ran a systematic literature review grounded in the PRISMA process (Page et al., 2021) (Figure 2.1). We host this dataset on HuggingFace 4 and present a datasheet (Gebru et al., 2021) for the dataset in Appendix A.3. Our main data sources were arXiv, Semantic Scholar, and ACL. We query these databases with a list of 44 keywords narrowly related to prompting and prompt engineering (Appendix A.4). 
 
 ### 2.1.1 The Pipeline
 
--787
+In this section, we introduce our data scraping pipeline, which includes both human and LLM-assisted review.5 As an initial sample to establish filtering critera, we retrieve papers from arXiv based on a simple set of keywords and boolean rules (A.4). Then, human annotators label a sample of 1,661 articles from the arXiv set for the following criteria:
 
-787 papers excluded
+1. Include if the paper proposes a novel prompting technique. 
 
-In this section, we introduce our data scraping
+2. Include if the paper strictly covers hard prefix prompts. 
 
-pipeline, which includes both human and LLM-
+3. Exclude if the paper focuses on training by backpropagating gradients. 
 
-After The PRISMA Review Process, 
+4. Include if the paper uses a masked frame and/or window for non-text modalities. 
 
-1,565 records included in quantitative analysis. 
+A set of 300 articles are reviewed independently by two annotators, with 92% agreement (Krippendorff's *α *= Cohen's *κ *= 81%). Next, we develop a prompt using gpt-4-1106-preview to classify the remaining articles (Appendix A.5). We validate the prompt against 100 ground-truth annotations, achieving 89% precision and 75% recall (for an *F * 1 of 81%). The combined human and LLM annotations generate a final set of 1,565 papers. 
 
-assisted review.5 As an initial sample to establish filtering critera, we retrieve papers from arXiv
-
-Figure 2.1: The PRISMA systematic literature review
-
-based on a simple set of keywords and boolean
-
-process. We accumulate 4,247 unique records from
-
-rules (A.4). Then, human annotators label a sample which we extract 1,565 relevant records. 
-
-of 1,661 articles from the arXiv set for the follow-
-
-ing criteria:
-
-## 2.2 Text-Based Techniques
-
-1. Include if the paper proposes a novel prompt-
-
-We now present a comprehensive taxonomical on-
-
-ing technique. 
-
-tology of 58 text-based prompting techniques, bro-
-
-ken into 6 major categories (Figure 2.2). Although 2. Include if the paper strictly covers hard prefix
-
-some of the techniques might fit into multiple cate-
-
-prompts. 
-
-gories, we place them in a single category of most
-
-relevance. 
-
-3. Exclude if the paper focuses on training by
-
-backpropagating gradients. 
-
-### 2.2.1 In-Context Learning (ICL)
-
-4. Include if the paper uses a masked frame
-
-ICL refers to the ability of GenAIs to learn skills
-
-and/or window for non-text modalities. 
-
-and tasks by providing them with exemplars and or
-
-relevant instructions within the prompt, without the
-
-need for weight updates/retraining (Brown et al., 
-
-A set of 300 articles are reviewed independently
-
-2020; Radford et al., 2019b). These skills can be by two annotators, with 92% agreement (Krippen-learned from exemplars (Figure 2.4) and/or instruc-dorff's *α *= Cohen's *κ *= 81%). Next, we develop tions (Figure 2.5). Note that the word "learn" is a prompt using gpt-4-1106-preview to classify the
-
-misleading. ICL can simply be task specification–
-
-remaining articles (Appendix A.5). We validate the skills are not necessarily new, and can have
-
-the prompt against 100 ground-truth annotations, 
-
-already been included in the training data (Figure
-
-achieving 89% precision and 75% recall (for an *F * 1
-
-2.6). See Appendix A.9 for a discussion of the use of 81%). The combined human and LLM annota-of this term. Significant work is currently being
-
-tions generate a final set of 1,565 papers. 
-
-done on optimizing (Bansal et al., 2023) and un-4https://huggingface.co/datasets/PromptSystematicReview/Prompt\_Systematic\_Re
-
-derstanding (Si vie
-
-et w\_Dataset
-
-al., 2023a; Štefánik and Kadlčík, 
+4https://huggingface.co/datasets/PromptSystematicReview/Prompt\_Systematic\_Review\_Dataset
 
 5Using gpt-4-1106-preview
 
-2023) ICL. 
-
-8
-
-Emotion Prompting 2.2.1.3
-
-Role Prompting 2.2.1.3
-
-Style Prompting 2.2.1.3
-
-S2A 2.2.1.3
-
-Zero-Shot 2.2.1.3
-
-SimToM 2.2.1.3
-
-RaR 2.2.1.3
-
-RE2 2.2.1.3
-
-Self-Ask 2.2.1.3
-
-Exemplar Generation
-
-SG-ICL 2.2.1.2
-
-Exemplar Ordering 2.2.1.1
-
-Analogical Prompting
-
-Few-Shot 2.2.1
-
-Exemplar Selection
-
-KNN 2.2.1.2
-
-2.2.2.1
-
-2.2.1.2
-
-Vote-K 2.2.1.2
-
-Step-Back Prompting
-
-Instruction Selection 2.2.1.1
-
-2.2.2.1
-
-Zero-Shot CoT 2.2.2.1
-
-Thread-of-Thought
-
-(ThoT) 2.2.2.1
-
-Tab-CoT 2.2.2.1
-
-Chain-of-Thought
-
-Active-Prompt 2.2.2.2
-
-Thought Generation 2.2.2
-
-(CoT) 2.2.2
-
-Auto-CoT 2.2.2.2
-
-COSP 2.2.4
-
-Complexity-Based 2.2.2.2
-
-DENSE 2.2.4
-
-Contrastive 2.2.2.2
-
-DiVeRSe 2.2.4
-
-Few-Shot CoT 2.2.2.2
-
-Memory-of-Thought
-
-2.2.2.2
-
-Max Mutual
-
-Information 2.2.4
-
-Text-Base Prompt. Tech. 
-
-Uncertainty-Routed
-
-CoT 2.2.2.2
-
-Meta-CoT 2.2.4
-
-Ensembling 2.2.4
-
-Prompt Mining 2.2.1.2
-
-MoRE 2.2.4
-
-AutoDiCoT 6.2.3.3
-
-Self-Consistency 2.2.4
-
-Universal
-
-Self-Consistency 2.2.4
-
-USP 2.2.4
-
-Prompt Paraphrasing 2.2.4
-
-Chain-of-Verification 2.2.5
-
-Self-Calibration 2.2.5
-
-Self-Refine 2.2.5
-
-Self-Criticism 2.2.5
-
-Self-Verification 2.2.5
-
-ReverseCoT 2.2.5
-
-Cumulative Reason. 2.2.5
-
-DECOMP 2.2.3
-
-Faithful CoT 2.2.3
-
-Least-to-Most 2.2.3
-
-Plan-and-Solve 2.2.3
-
-Decomposition 2.2.3
-
-Program-of-Thought 2.2.3
-
-Recurs.-of-Thought 2.2.3
-
-Skeleton-of-Thought 2.2.3
-
-Tree-of-Thought 2.2.3
-
-Metacognitive 2.2.3
+## 2.2 Text-Based Techniques
+
+We now present a comprehensive taxonomical ontology of 58 text-based prompting techniques, broken into 6 major categories (Figure 2.2). Although some of the techniques might fit into multiple categories, we place them in a single category of most relevance. 
+
+```mermaid
+graph TD
+    A[Text-Based Prompt. Tech.] --> B[In-Context Learning 2.2.1]
+    A --> C[Thought Generation 2.2.2]
+    A --> D[Decomposition 2.2.3]
+    A --> E[Ensembling 2.2.4]
+    A --> F[Self-Criticism 2.2.5]
+    A --> G[Answer Engineering 2.2.6]
+    
+    B --> B1[Few-Shot 2.2.1]
+    B1 --> B11[Exemplar Ordering 2.2.1.1]
+    B1 --> B12[Exemplar Selection 2.2.1.2]
+    B12 --> B121[KNN 2.2.1.2]
+    B12 --> B122[Vote-K 2.2.1.2]
+    B12 --> B123[SG-ICL 2.2.1.2]
+    B12 --> B124[Prompt Mining 2.2.1.2]
+    B1 --> B13[Zero-Shot 2.2.1.3]
+    B13 --> B131[Emotion Prompting 2.2.1.3]
+    B13 --> B132[Role Prompting 2.2.1.3]
+    B13 --> B133[Style Prompting 2.2.1.3]
+    B13 --> B134[S2A 2.2.1.3]
+    B13 --> B135[SimToM 2.2.1.3]
+    B13 --> B136[RaR 2.2.1.3]
+    B13 --> B137[RE2 2.2.1.3]
+    B13 --> B138[Self-Ask 2.2.1.3]
+    
+    C --> C1[Chain-of-Thought CoT 2.2.2]
+    C1 --> C11[Zero-Shot CoT 2.2.2.1]
+    C11 --> C111[Step-Back Prompting 2.2.2.1]
+    C11 --> C112[Analogical Prompting 2.2.2.1]
+    C11 --> C113[Thread-of-Thought ThoT 2.2.2.1]
+    C11 --> C114[Tab-CoT 2.2.2.1]
+    C1 --> C12[Few-Shot CoT 2.2.2.2]
+    C12 --> C121[Active-Prompt 2.2.2.2]
+    C12 --> C122[Auto-CoT 2.2.2.2]
+    C12 --> C123[Complexity-Based 2.2.2.2]
+    C12 --> C124[Contrastive 2.2.2.2]
+    C12 --> C125[Memory-of-Thought 2.2.2.2]
+    C12 --> C126[Uncertainty-Routed CoT 2.2.2.2]
+    
+    E --> E1[Self-Consistency 2.2.4]
+    E --> E2[DENSE 2.2.4]
+    E --> E3[DiVeRSe 2.2.4]
+    E --> E4[COSP 2.2.4]
+    E --> E5[MoRE 2.2.4]
+    E --> E6[Meta-CoT 2.2.4]
+    E --> E7[Max Mutual Information 2.2.4]
+```
 
 Figure 2.2: All text-based prompting techniques from our dataset. 
 
-9
+### 2.2.1 In-Context Learning (ICL)
 
-1. Exemplar Quantity
+ICL refers to the ability of GenAIs to learn skills and tasks by providing them with exemplars and or relevant instructions within the prompt, without the need for weight updates/retraining (Brown et al., 2020; Radford et al., 2019b). These skills can be learned from exemplars (Figure 2.4) and/or instructions (Figure 2.5). Note that the word "learn" is misleading. ICL can simply be task specification–skills are not necessarily new, and can have already been included in the training data (Figure 2.6). See Appendix A.9 for a discussion of the use of this term. Significant work is currently being done on optimizing (Bansal et al., 2023) and understanding (Si et al., 2023a; Štefánik and Kadlčík, 2023) ICL.
 
-2. Exemplar Ordering
-
-Include as many exemplars as 
-
-Randomly order exemplars\*
-
-2\+2: four
-
-possible\*
-
-4\+5: nine
-
-Trees are beautiful: Happy
-
-I am so mad: Angry
-
-I hate Pizza: Angry
-
-I love life: Happy
-
-8\+0:
-
-Squirrels are so cute: Happy
-
-I hate my boss: Angry
-
-YouTube Ads Suck: Angry
-
-Life is good: Happy
-
-I'm so excited: 
-
-I'm so excited: 
-
-Figure 2.4: ICL exemplar prompt
-
-I love life: Happy
-
-Life is good: Happy
-
-Trees are beautiful: Happy
-
-I am so mad: Angry
-
-I'm so excited: 
-
-I hate my boss: Angry
-
-I'm so excited: 
-
-Extract all words that have 3 of the same
-
-3. Exemplar Label Distribution
-
-4. Exemplar Label Quality
-
-letter and at least 3 other letters from the
-
-Provide a balanced label 
-
-Ensure exemplars are labeled 
-
-following text: {TEXT}
-
-distribution\*
-
-correctly\*
-
-I am so mad: Angry
-
-I am so mad: Angry
-
-I love life: Happy
-
-I love life: Happy
-
-I hate my boss: Angry
-
-I hate my boss: Angry
-
-Figure 2.5: ICL instruction prompt
-
-Life is good: Happy
-
-Life is good: Happy
-
-I'm so excited: 
-
-I'm so excited: 
-
-I am so mad: Angry
-
-I am so mad: Happy
-
-People are so dense: Angry
-
-I love life: Angry
-
-Exemplar Quantity
-
-Increasing the quantity of ex-
-
-I hate my boss: Angry
-
-I hate my boss: Angry
-
-Life is good: Happy
-
-Life is good: Happy
-
-emplars in the prompt generally improves model
-
-I'm so excited: 
-
-I'm so excited: 
-
-performance, particularly in larger models (Brown
-
-5. Exemplar Format
-
-6. Exemplars Similarity
-
-et al., 2020). However, in some cases, the bene-Choose a common format\*
-
-Select similar exemplars to 
-
-the test instance\*
-
-fits may diminish beyond 20 exemplars (Liu et al., 
-
-2021). In the case of long context LLMs, addi-Im hyped\!: Happy
-
-Im hyped\!: Happy
-
-Im not very excited: Angry
-
-Im not very excited: Angry
-
-tional exemplars continue to increase performance, 
-
-I'm so excited: 
-
-I'm so excited: 
-
-though efficiency varies depending on task and
-
-model (Agarwal et al., 2024; Bertsch et al., 2024; 
-
-Trees are nice===Happy
-
-Trees are beautiful: Happy
-
-Jiang et al., 2024). 
-
-YouTube Ads Suck===Angry
-
-YouTube Ads Suck: Angry
-
-I'm so excited===
-
-I'm so excited: 
-
-Exemplar Ordering
-
-The order of exemplars af-
-
-fects model behavior (Lu et al., 2021; Kumar and
-
-Figure 2.3: We highlight six main design decisions
-
-Talukdar, 2021; Liu et al., 2021; Rubin et al., 2022). 
-
-when crafting few-shot prompts. ∗Please note that rec-
-
-On some tasks, exemplar order can cause accuracy
-
-ommendations here do not generalize to all tasks; in
-
-some cases, each of them could hurt performance. 
-
-to vary from sub-50% to 90%\+ (Lu et al., 2021). 
-
-Exemplar Label Distribution
-
-As in traditional
-
-Few-Shot Prompting
-
-(Brown et al., 2020) is the
-
-supervised machine learning, the distribution of
-
-paradigm seen in Figure 2.4, where the GenAI exemplar labels in the prompt affects behavior. For
-
-learns to complete a task with only a few examples
-
-example, if 10 exemplars from one class and 2
-
-(exemplars). Few-shot prompting is a special case
-
-exemplars of another class are included, this may
-
-of Few-Shot Learning (FSL) (Fei-Fei et al., 2006; 
-
-cause the model to be biased toward the first class. 
-
-Wang et al., 2019), but does not require updating Exemplar Label Quality
-
-Despite the general ben-
-
-of model parameters
-
-efit of multiple exemplars, the necessity of strictly
-
-valid demonstrations is unclear. Some work (Min
+**Few-Shot Prompting** (Brown et al., 2020) is the paradigm seen in Figure 2.4, where the GenAI learns to complete a task with only a few examples (exemplars). Few-shot prompting is a special case of Few-Shot Learning (FSL) (Fei-Fei et al., 2006; Wang et al., 2019), but does not require updating of model parameters.
 
 #### 2.2.1.1 Few-Shot Prompting Design Decisions
 
-et al., 2022) suggests that the accuracy of labels is Selecting exemplars for a prompt is a difficult task–
+Selecting exemplars for a prompt is a difficult task–performance depends significantly on various factors of the exemplars (Dong et al., 2023), and only a limited number of exemplars fit in the typical LLM's context window. We highlight six separate design decisions, including the selection and order of exemplars that critically influence the output quality (Zhao et al., 2021a; Lu et al., 2021; Ye and Durrett, 2023) (Figure 2.3).
 
-irrelevant—providing models with exemplars with
+**Figure 2.3: Few-Shot Prompting Design Decisions**
 
-performance depends significantly on various fac-
+| Design Decision | Recommendation | Example |
+|---|---|---|
+| 1. Exemplar Quantity | Include as many exemplars as possible* | More examples generally improve performance |
+| 2. Exemplar Ordering | Randomly order exemplars* | Order can dramatically affect results |
+| 3. Exemplar Label Distribution | Provide a balanced label distribution* | Avoid bias toward overrepresented classes |
+| 4. Exemplar Label Quality | Ensure exemplars are labeled correctly* | Incorrect labels may hurt performance |
+| 5. Exemplar Format | Choose a common format* | Use consistent formatting patterns |
+| 6. Exemplars Similarity | Select similar exemplars to the test instance* | Similar examples often work better |
 
-incorrect labels may not negatively diminish per-
+*Please note that recommendations here do not generalize to all tasks; in some cases, each of them could hurt performance.
 
-tors of the exemplars (Dong et al., 2023), and only formance. However, under certain settings, there
+**Figure 2.4: ICL exemplar prompt**
 
-a limited number of exemplars fit in the typical
+```
+2+2: four
+4+5: nine
+Trees are beautiful: Happy
+I am so mad: Angry
+I hate Pizza: Angry
+I love life: Happy
+8+0:
+```
 
-is a significant impact on performance (Yoo et al., 
+Alternative ordering:
+```
+Squirrels are so cute: Happy
+I hate my boss: Angry
+YouTube Ads Suck: Angry
+Life is good: Happy
+I'm so excited: 
+```
 
-LLM's context window. We highlight six separate
+**Figure 2.5: ICL instruction prompt**
 
-2022). Larger models are often better at handling design decisions, including the selection and or-incorrect or unrelated labels (Wei et al., 2023c). 
+```
+Extract all words that have 3 of the same letter and at least 3 other letters from the following text: {TEXT}
+```
 
-der of exemplars that critically influence the output
+**Examples comparing good vs. poor label quality:**
 
-It is important to discuss this factor, since if you
+Good labeling:
+```
+I am so mad: Angry
+I love life: Happy
+I hate my boss: Angry
+Life is good: Happy
+I'm so excited: 
+```
 
-quality (Zhao et al., 2021a; Lu et al., 2021; Ye and
+Poor labeling:
+```
+I am so mad: Happy
+I love life: Angry
+People are so dense: Angry
+I hate my boss: Angry
+Life is good: Happy
+I'm so excited: 
+```
 
-are automatically constructing prompts from large
+**Exemplar Format Examples:**
 
-Durrett, 2023) (Figure 2.3). 
+Common format:
+```
+Im hyped!: Happy
+Im not very excited: Angry
+I'm so excited: 
+```
 
-datasets that may contain inaccuracies, it may be
+Alternative format:
+```
+Trees are nice===Happy
+YouTube Ads Suck===Angry
+I'm so excited===
+```
 
-10
+**Exemplar Quantity**: Increasing the quantity of exemplars in the prompt generally improves model performance, particularly in larger models (Brown et al., 2020). However, in some cases, the benefits may diminish beyond 20 exemplars (Liu et al., 2021). In the case of long context LLMs, additional exemplars continue to increase performance, though efficiency varies depending on task and model (Agarwal et al., 2024; Bertsch et al., 2024; Jiang et al., 2024).
 
-generated with respect to *Dtest*
+**Exemplar Ordering**: The order of exemplars affects model behavior (Lu et al., 2021; Kumar and Talukdar, 2021; Liu et al., 2021; Rubin et al., 2022). On some tasks, exemplar order can cause accuracy to vary from sub-50% to 90%+ (Lu et al., 2021).
 
-Translate the word "cheese" to French. 
+**Exemplar Label Distribution**: As in traditional supervised machine learning, the distribution of exemplar labels in the prompt affects behavior. For example, if 10 exemplars from one class and 2 exemplars of another class are included, this may cause the model to be biased toward the first class.
 
-*xi*
+**Exemplar Label Quality**: Despite the general benefit of multiple exemplars, the necessity of strictly valid demonstrations is unclear. Some work (Min et al., 2022) suggests that the accuracy of labels is irrelevant—providing models with exemplars with incorrect labels may not negatively diminish performance. However, under certain settings, there is a significant impact on performance (Yoo et al., 2022). Larger models are often better at handling incorrect or unrelated labels (Wei et al., 2023c). It is important to discuss this factor, since if you are automatically constructing prompts from large datasets that may contain inaccuracies, it may be necessary to study how label quality affects your results.
 
-at test time. Here
+**Exemplar Format**: The formatting of exemplars also affects performance. One of the most common formats is "Q: {input}, A: {label}", but the optimal format may vary across tasks; it may be worth trying multiple formats to see which performs best. There is some evidence to suggest that formats that occur commonly in the training data will lead to better performance (Jiang et al., 2020).
 
-is the prompt template we will use for this section, 
+**Exemplar Similarity**: Selecting exemplars that are similar to the test sample is generally beneficial for performance (Liu et al., 2021; Min et al., 2022). However, in some cases, selecting more diverse exemplars can improve performance (Su et al., 2022; Min et al., 2022).
 
-following the 'input: output' format (Figure 2.4):
+**Figure 2.6: ICL from training data prompt**
 
-Figure 2.6: ICL from training data prompt. In this
+```
+Translate the word "cheese" to French.
+```
 
-version of ICL, the model is not learning a new skill, 
+In this version of ICL, the model is not learning a new skill, but rather using knowledge likely in its training set.
 
+**Figure 2.7: Few-Shot Prompting Template**
+
+```
 {Exemplars}
+Dtest xi:
+```
 
-but rather using knowledge likely in its training set. 
-
-*Dtest*
-
-*xi*
-
-:
-
-necessary to study how label quality affects your
-
-results. 
-
-Figure 2.7: Few-Shot Prompting Template
-
-Exemplar Format
-
-The formatting of exemplars
-
-also affects performance. One of the most common
-
-K-Nearest Neighbor (KNN)
-
-(Liu et al., 2021) is
-
-formats is "Q: {input}, A: {label}", but the optimal
-
-part of a family of algorithms that selects exemplars
-
-format may vary across tasks; it may be worth
-
-similar to *Dtest*
-
-*xi*
-
-to boost performance. Although ef-
-
-trying multiple formats to see which performs best. 
-
-fective, employing KNN during prompt generation
-
-There is some evidence to suggest that formats that
-
-may be time and resource intensive. 
-
-occur commonly in the training data will lead to
-
-better performance (Jiang et al., 2020). 
-
-Vote-K
-
-(Su et al., 2022) is another method to
-
-select similar exemplars to the test sample. In one
-
-Exemplar Similarity
-
-Selecting exemplars that
-
-stage, a model proposes useful unlabeled candidate
-
-are similar to the test sample is generally bene-
-
-exemplars for an annotator to label. In the sec-
-
-ficial for performance (Liu et al., 2021; Min et al., 
-
-ond stage, the labeled pool is used for Few-Shot
-
-2022). However, in some cases, selecting more Prompting. Vote-K also ensures that newly added
-
-diverse exemplars can improve performance (Su
-
-exemplars are sufficiently different than existing
-
-et al., 2022; Min et al., 2022). 
-
-ones to increase diversity and representativeness. 
-
-Instruction Selection
-
-While instructions are re-
-
-Self-Generated In-Context Learning (SG-ICL)
-
-quired to guide LLMs in zero-shot prompts (Wei
-
-(Kim et al., 2022) leverages a GenAI to automati-
-
-et al., 2022a), the benefits of adding instructions cally generate exemplars. While better than zero-before exemplars in few-shot prompts is less clear. 
-
-shot scenarios when training data is unavailable, 
-
-Ajith et al. (2024) show that generic, task-agnostic the generated samples are not as effective as actual
-
-instructions (i.e., no instruction or "Complete the
-
-data. 
-
-following task:") improve classification and ques-
-
-tion answering accuracy over task-specific ones
-
-Prompt Mining
-
-(Jiang et al., 2020) is the process
-
-(e.g., What is the answer to this question?) conclud-
-
-of discovering optimal "middle words" in prompts
-
-ing instruction-following abilities can be achieved
-
-through large corpus analysis. These middle words
-
-via exemplars alone. While they may not improve
-
-are effectively prompt templates. For example, in-
-
-correctness, instructions in few-shot prompts can
-
-stead of using the common "Q: A:" format for few-
-
-still guide auxiliary output attributes like writing
-
-shot prompts, there may exist something similar
-
-style (Roy et al., 2023). 
-
-that occurs more frequently in the corpus. Formats
-
-which occur more often in the corpus will likely
+Here is the prompt template we will use for this section, following the 'input: output' format (Figure 2.4).
 
 #### 2.2.1.2 Few-Shot Prompting Techniques
 
-lead to improved prompt performance. 
+Considering all of these factors, Few-Shot Prompting can be very difficult to implement effectively. We now examine techniques for Few-Shot Prompting in the supervised setting.
 
-Considering all of these factors, Few-Shot Prompt-
+Assume we have a training dataset, Dtrain, which contains multiple inputs Dtrain xi and outputs Dtrain yi, which can be used to few-shot prompt a GenAI (rather than performing gradient-based updates). Assume that this prompt can be dynamically generated with respect to Dtest xi at test time.
 
-ing can be very difficult to implement effectively. 
+**K-Nearest Neighbor (KNN)** (Liu et al., 2021) is part of a family of algorithms that selects exemplars similar to Dtest xi to boost performance. Although effective, employing KNN during prompt generation may be time and resource intensive.
 
-More Complicated Techniques
+**Vote-K** (Su et al., 2022) is another method to select similar exemplars to the test sample. In one stage, a model proposes useful unlabeled candidate exemplars for an annotator to label. In the second stage, the labeled pool is used for Few-Shot Prompting. Vote-K also ensures that newly added exemplars are sufficiently different than existing ones to increase diversity and representativeness.
 
-such as LENS
+**Self-Generated In-Context Learning (SG-ICL)** (Kim et al., 2022) leverages a GenAI to automatically generate exemplars. While better than zero-shot scenarios when training data is unavailable, the generated samples are not as effective as actual data.
 
-We now examine techniques for Few-Shot Prompt-
+**Prompt Mining** (Jiang et al., 2020) is the process of discovering optimal "middle words" in prompts through large corpus analysis. These middle words are effectively prompt templates. For example, instead of using the common "Q: A:" format for few-shot prompts, there may exist something similar that occurs more frequently in the corpus. Formats which occur more often in the corpus will likely lead to improved prompt performance.
 
-(Li and Qiu, 2023a), UDR (Li et al., 2023f), and ing in the supervised setting. 
+**Instruction Selection**: While instructions are required to guide LLMs in zero-shot prompts (Wei et al., 2022a), the benefits of adding instructions before exemplars in few-shot prompts is less clear. Ajith et al. (2024) show that generic, task-agnostic instructions (i.e., no instruction or "Complete the following task:") improve classification and question answering accuracy over task-specific ones (e.g., What is the answer to this question?) concluding instruction-following abilities can be achieved via exemplars alone. While they may not improve correctness, instructions in few-shot prompts can still guide auxiliary output attributes like writing style (Roy et al., 2023).
 
-Ensembling ap-
-
-Active Example Selection (Zhang et al., 2022a)
-
-proaches can also benefit Few-Shot Prompting, but
-
-leverage iterative filtering, embedding and retrieval, 
-
-we discuss them separately (Section 2.2.4). 
-
-and reinforcement learning, respectively. 
-
-Assume we have a training dataset, *Dtrain*, 
-
-which contains multiple inputs *Dtrain*
+**More Complicated Techniques** such as LENS (Li and Qiu, 2023a), UDR (Li et al., 2023f), and Active Example Selection (Zhang et al., 2022a) leverage iterative filtering, embedding and retrieval, and reinforcement learning, respectively. Ensembling approaches can also benefit Few-Shot Prompting, but we discuss them separately (Section 2.2.4).
 
 #### 2.2.1.3 Zero-Shot Prompting Techniques
 
-*xi*
+In contrast to Few-Shot Prompting, Zero-Shot Prompting uses zero exemplars. There are a number of well-known standalone zero-shot techniques as well as zero-shot techniques combined with another concept (e.g. Chain of Thought), which we discuss later (Section 2.2.2).
 
-and outputs
+**Role Prompting** (Wang et al., 2023j; Zheng et al., 2023d), also known as persona prompting (Schmidt et al., 2023; Wang et al., 2023l), assigns a specific role to the GenAI in the prompt. For example, the user might prompt it to act like "Madonna" or a "travel writer". This can create more desirable outputs for open-ended tasks (Reynolds and McDonell, 2021) and in some cases may improve accuracy on benchmarks (Zheng et al., 2023d).
 
-*Dtrain*
+**Figure 2.8: A One-Shot Chain-of-Thought Prompt**
 
-In contrast to Few-Shot Prompting, Zero-Shot
+```
+Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? 
 
-*yi*
+A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. 
 
-, which can be used to few-shot prompt a
-
-GenAI (rather than performing gradient-based up-
-
-Prompting uses zero exemplars. There are a num-
-
-dates). Assume that this prompt can be dynamically
-
-ber of well-known standalone zero-shot techniques
-
-11
-
-as well as zero-shot techniques combined with an-Q: Jack has two baskets, each containing
-
-other concept (e.g. Chain of Thought), which we
-
-three balls. How many balls does Jack have
-
-discuss later (Section 2.2.2). 
-
-in total? 
-
-Role Prompting
-
-(Wang et al., 2023j; Zheng
-
-A: One basket contains 3 balls, so two bas-
-
-et al., 2023d) , also known as persona prompting kets contain 3 \* 2 = 6 balls. 
-
-(Schmidt et al., 2023; Wang et al., 2023l), assigns a Q: {QUESTION}
-
-specific role to the GenAI in the prompt. For exam-
+Q: {QUESTION}
 
 A:
+```
 
-ple, the user might prompt it to act like "Madonna" 
+**Style Prompting** (Lu et al., 2023a) involves specifying the desired style, tone, or genre in the prompt to shape the output of a GenAI. A similar effect can be achieved using role prompting.
 
-or a "travel writer". This can create more desir-
+**Emotion Prompting** (Li et al., 2023a) incorporates phrases of psychological relevance to humans (e.g., "This is important to my career") into the prompt, which may lead to improved LLM performance on benchmarks and open-ended text generation.
 
-Figure 2.8: A One-Shot Chain-of-Thought Prompt. 
+**System 2 Attention (S2A)** (Weston and Sukhbaatar, 2023) first asks an LLM to rewrite the prompt and remove any information unrelated to the question therein. Then, it passes this new prompt into an LLM to retrieve a final response.
 
-able outputs for open-ended tasks (Reynolds and
+**SimToM** (Wilf et al., 2023) deals with complicated questions which involve multiple people or objects. Given the question, it attempts to establish the set of facts one person knows, then answer the question based only on those facts. This is a two prompt process and can help eliminate the effect of irrelevant information in the prompt.
 
-McDonell, 2021) and in some cases may improve accuracy on benchmarks (Zheng et al., 2023d). 
+**Self-Ask** (Press et al., 2022) prompts LLMs to first decide if they need to ask follow up questions for a given prompt. If so, the LLM generates these questions, then answers them and finally answers the original question.
 
-in reasoning benchmarks, especially with complex
+### 2.2.2 Thought Generation
 
-questions. 
+Thought generation encompasses a range of techniques that prompt the LLM to articulate its reasoning while solving a problem (Zhang et al., 2023c).
 
-Style Prompting
+**Chain-of-Thought (CoT) Prompting** (Wei et al., 2022b) leverages few-shot prompting to encourage the LLM to express its thought process before delivering its final answer.6 This technique is occasionally referred to as Chain-of-Thoughts (Tutunov et al., 2023; Besta et al., 2024; Chen et al., 2023d). It has been demonstrated to significantly enhance the LLM's performance in mathematics and reasoning tasks. In Wei et al. (2022b), the prompt includes an exemplar featuring a question, a reasoning path, and the correct answer (Figure 2.8).
 
-(Lu et al., 2023a) involves spec-
-
-ifying the desired style, tone, or genre in the prompt
-
-Self-Ask
-
-(Press et al., 2022) prompts LLMs to
-
-to shape the output of a GenAI. A similar effect
-
-first decide if they need to ask follow up questions
-
-can be achieved using role prompting. 
-
-for a given prompt. If so, the LLM generates these
-
-questions, then answers them and finally answers
-
-Emotion Prompting
-
-(Li et al., 2023a) incorpo-
-
-the original question. 
-
-rates phrases of psychological relevance to humans
-
-(e.g., "This is important to my career") into the ### 2.2.2 Thought Generation
-
-prompt, which may lead to improved LLM perfor-
-
-Thought generation encompasses a range of tech-
-
-mance on benchmarks and open-ended text genera-
-
-niques that prompt the LLM to articulate its reason-
-
-tion. 
-
-ing while solving a problem (Zhang et al., 2023c). 
-
-System
-
-2
-
-Attention
-
-(S2A)
-
-(Weston
-
-and
-
-Chain-of-Thought (CoT) Prompting
-
-(Wei et al., 
-
-Sukhbaatar, 2023) first asks an LLM to rewrite
-
-2022b) leverages few-shot prompting to encour-the prompt and remove any information unrelated
-
-age the LLM to express its thought process before
-
-to the question therein. Then, it passes this new
-
-delivering its final answer.6 This technique is occa-prompt into an LLM to retrieve a final response. 
-
-sionally referred to as Chain-of-Thoughts (Tutunov
-
-SimToM
-
-(Wilf et al., 2023) deals with compli-
-
-et al., 2023; Besta et al., 2024; Chen et al., 2023d). 
-
-cated questions which involve multiple people or
-
-It has been demonstrated to significantly enhance
-
-objects. Given the question, it attempts to establish
-
-the LLM's performance in mathematics and reason-
-
-the set of facts one person knows, then answer the
-
-ing tasks. In Wei et al. (2022b), the prompt includes question based only on those facts. This is a two
-
-an exemplar featuring a question, a reasoning path, 
-
-prompt process and can help eliminate the effect of
-
-and the correct answer (Figure 2.8). 
-
-irrelevant information in the prompt. 
+6We note that such techniques are often described using words like "think" that anthropomorphize models. We attempt not to use this language, but do use original authors' language where appropriate.
 
 #### 2.2.2.1 Zero-Shot-CoT
 
-Rephrase and Respond (RaR)
+The most straightforward version of CoT contains zero exemplars. It involves appending a thought inducing phrase like "Let's think step by step." (Kojima et al., 2022) to the prompt. Other suggested thought-generating phrases include "First, let's think about this logically" (Kojima et al., 2022). Zhou et al. (2022b) uses LLMs to generate "Let's work this out in a step by step way to be sure we have the right answer". Yang et al. (2023a) searches for an optimal thought inducer. Zero-Shot-CoT approaches are attractive as they don't require exemplars and are generally task agnostic.
 
-(Deng et al., 2023)
+**Rephrase and Respond (RaR)** (Deng et al., 2023) instructs the LLM to rephrase and expand the question before generating the final answer. For example, it might add the following phrase to the question: "Rephrase and expand the question, and respond". This could all be done in a single pass or the new question could be passed to the LLM separately. RaR has demonstrated improvements on multiple benchmarks.
 
-The most straightforward version of CoT contains
+**Re-reading (RE2)** (Xu et al., 2023) adds the phrase "Read the question again:" to the prompt in addition to repeating the question. Although this is such a simple technique, it has shown improvement in reasoning benchmarks, especially with complex questions.
 
-instructs the LLM to rephrase and expand the ques-
+**Step-Back Prompting** (Zheng et al., 2023c) is a modification of CoT where the LLM is first asked a generic, high-level question about relevant concepts or facts before delving into reasoning. This approach has improved performance significantly on multiple reasoning benchmarks for both PaLM-2L and GPT-4.
 
-zero exemplars. It involves appending a thought
+**Analogical Prompting** (Yasunaga et al., 2023) is similar to SG-ICL, and automatically generates exemplars that include CoTs. It has demonstrated improvements in mathematical reasoning and code generation tasks.
 
-tion before generating the final answer. For ex-
+**Thread-of-Thought (ThoT) Prompting** (Zhou et al., 2023) consists of an improved thought inducer for CoT reasoning. Instead of "Let's think step by step," it uses "Walk me through this context in manageable parts step by step, summarizing and analyzing as we go." This thought inducer works well in question-answering and retrieval settings, especially when dealing with large, complex contexts.
 
-inducing phrase like "Let's think step by step." 
+**Tabular Chain-of-Thought (Tab-CoT)** (Jin and Lu, 2023) consists of a Zero-Shot CoT prompt that makes the LLM output reasoning as a markdown table. This tabular design enables the LLM to improve the structure and thus the reasoning of its output.
 
-ample, it might add the following phrase to the
+#### 2.2.2.2 Few-Shot CoT
 
-(Kojima et al., 2022) to the prompt. Other sug-question: "Rephrase and expand the question, and
+This set of techniques presents the LLM with multiple exemplars, which include chains-of-thought. This can significantly enhance performance. This technique is occasionally referred to as Manual-CoT (Zhang et al., 2022b) or Golden CoT (Del and Fishel, 2023).
 
-gested thought-generating phrases include "First, 
+**Complexity-based Prompting** (Fu et al., 2023b) involves two major modifications to CoT. First, it selects complex examples for annotation and inclusion in the prompt, based on factors like question length or reasoning steps required. Second, during inference, it samples multiple reasoning chains (answers) and uses a majority vote among chains exceeding a certain length threshold, under the premise that longer reasoning indicates higher answer quality. This technique has shown improvements on three mathematical reasoning datasets.
 
-respond". This could all be done in a single pass
+**Active Prompting** (Diao et al., 2023) starts with some training questions/exemplars, asks the LLM to solve them, then calculates uncertainty (disagreement in this case) and asks human annotators to rewrite the exemplars with highest uncertainty.
 
-let's think about this logically" (Kojima et al., 
+**Memory-of-Thought Prompting** (Li and Qiu, 2023b) leverage unlabeled training exemplars to build Few-Shot CoT prompts at test time. Before test time, it performs inference on the unlabeled training exemplars with CoT. At test time, it retrieves similar instances to the test sample. This technique has shown substantial improvements in benchmarks like Arithmetic, commonsense, and factual reasoning.
 
-or the new question could be passed to the LLM
-
-2022). Zhou et al. (2022b) uses LLMs to generate separately. RaR has demonstrated improvements
-
-"Let's work this out in a step by step way to be
-
-on multiple benchmarks. 
-
-sure we have the right answer". Yang et al. (2023a)
-
-searches for an optimal thought inducer. Zero-Shot-
-
-Re-reading (RE2)
-
-(Xu et al., 2023) adds the
-
-6
-
-phrase "Read the question again:" to the prompt in We note that such techniques are often described using
-
-words like "think" that anthropomorphize models. We attempt addition to repeating the question. Although this is
-
-not to use this language, but do use original authors' language such a simple technique, it has shown improvement
-
-where appropriate. 
-
-12
-
-CoT approaches are attractive as they don't require benchmark for both GPT-4 and Gemini Ultra mod-exemplars and are generally task agnostic. 
-
-els. 
-
-Step-Back Prompting
-
-(Zheng et al., 2023c) is a
-
-Complexity-based Prompting
-
-(Fu et al., 2023b)
-
-modification of CoT where the LLM is first asked
-
-involves two major modifications to CoT. First, it
-
-a generic, high-level question about relevant con-
-
-selects complex examples for annotation and in-
-
-cepts or facts before delving into reasoning. This
-
-clusion in the prompt, based on factors like ques-
-
-approach has improved performance significantly
-
-tion length or reasoning steps required. Second, 
-
-on multiple reasoning benchmarks for both PaLM-
-
-during inference, it samples multiple reasoning
-
-2L and GPT-4. 
-
-chains (answers) and uses a majority vote among
-
-Analogical Prompting
-
-(Yasunaga et al., 2023)
-
-chains exceeding a certain length threshold, under
-
-is similar to SG-ICL, and automatically generates
-
-the premise that longer reasoning indicates higher
-
-exemplars that include CoTs. It has demonstrated
-
-answer quality. This technique has shown improve-
-
-improvements in mathematical reasoning and code
-
-ments on three mathematical reasoning datasets. 
-
-generation tasks. 
-
-Active Prompting
-
-(Diao et al., 2023) starts with
-
-Thread-of-Thought (ThoT) Prompting
-
-(Zhou
-
-some training questions/exemplars, asks the LLM
-
-et al., 2023) consists of an improved thought in-to solve them, then calculates uncertainty (disagree-
-
-ducer for CoT reasoning. Instead of "Let's think
-
-ment in this case) and asks human annotators to
-
-step by step," it uses "Walk me through this context rewrite the exemplars with highest uncertainty. 
-
-in manageable parts step by step, summarizing and
-
-Memory-of-Thought Prompting
-
-(Li and Qiu, 
-
-analyzing as we go." This thought inducer works
-
-2023b) leverage unlabeled training exemplars to well in question-answering and retrieval settings, 
-
-build Few-Shot CoT prompts at test time. Before
-
-especially when dealing with large, complex con-
-
-test time, it performs inference on the unlabeled
-
-texts. 
-
-training exemplars with CoT. At test time, it re-
-
-Tabular Chain-of-Thought (Tab-CoT)
-
-(Jin and
-
-trieves similar instances to the test sample. This
-
-Lu, 2023) consists of a Zero-Shot CoT prompt that technique has shown substantial improvements in
-
-makes the LLM output reasoning as a markdown
-
-benchmarks like Arithmetic, commonsense, and
-
-table. This tabular design enables the LLM to im-
-
-factual reasoning. 
-
-prove the structure and thus the reasoning of its
-
-output. 
-
-Automatic Chain-of-Thought (Auto-CoT) Prompt-
-
-ing
-
-(Zhang et al., 2022b) uses Wei et al. (2022b)'s #### 2.2.2.2 Few-Shot CoT
-
-Zero-Shot prompt to automatically generate chains
-
-This set of techniques presents the LLM with mul-
-
-of thought. These are then used to build a Few-Shot
-
-tiple exemplars, which include chains-of-thought. 
-
-CoT prompt for a test sample. 
-
-This can significantly enhance performance. This
-
-technique is occasionally referred to as Manual-
+**Automatic Chain-of-Thought (Auto-CoT) Prompting** (Zhang et al., 2022b) uses Wei et al. (2022b)'s Zero-Shot prompt to automatically generate chains of thought. These are then used to build a Few-Shot CoT prompt for a test sample.
 
 ### 2.2.3 Decomposition
 
-CoT (Zhang et al., 2022b) or Golden CoT (Del and
+Significant research has focused on decomposing complex problems into simpler sub-questions. This is an effective problem-solving strategy for humans as well as GenAI (Patel et al., 2022). Some decomposition techniques are similar to thought-inducing techniques, such as CoT, which often naturally breaks down problems into simpler components. However, explicitly breaking down problems can further improve LLMs' problem solving ability.
 
-Significant research has focused on decomposing
+**Least-to-Most Prompting** (Zhou et al., 2022a) starts by prompting a LLM to break a given problem into sub-problems without solving them. Then, it solves them sequentially, appending model responses to the prompt each time, until it arrives at a final result. This method has shown significant improvements in tasks involving symbolic manipulation, compositional generalization, and mathematical reasoning.
 
-Fishel, 2023). 
+**Decomposed Prompting (DECOMP)** (Khot et al., 2022) Few-Shot prompts a LLM to show it how to use certain functions. These might include things like string splitting or internet searching; these are often implemented as separate LLM calls. Given this, the LLM breaks down its original problem into sub-problems which it sends to different functions. It has shown improved performance over Least-to-Most prompting on some tasks.
 
-complex problems into simpler sub-questions. This
+**Contrastive CoT Prompting** (Chia et al., 2023) adds both exemplars with incorrect and correct explanations to the CoT prompt in order to show the LLM how not to reason. This method has shown significant improvement in areas like Arithmetic Reasoning and Factual QA.
 
-Contrastive CoT Prompting
+**Uncertainty-Routed CoT Prompting** (Google, 2023) samples multiple CoT reasoning paths, then selects the majority if it is above a certain threshold (calculated based on validation data). If not, it samples greedily and selects that response. This method demonstrates improvement on the MMLU benchmark for both GPT-4 and Gemini Ultra models.
 
-(Chia et al., 2023)
+**Program-of-Thoughts** (Chen et al., 2023d) uses LLMs like Codex to generate programming code as reasoning steps. A code interpreter executes these steps to obtain the final answer. It excels in mathematical and programming-related tasks but is less effective for semantic reasoning tasks.
 
-is an effective problem-solving strategy for humans
+**Faithful Chain-of-Thought** (Lyu et al., 2023) generates a CoT that has both natural language and symbolic language (e.g. Python) reasoning, just like Program-of-Thoughts. However, it also makes use of different types of symbolic languages in a task-dependent fashion.
 
-adds both exemplars with incorrect and correct ex-
+**Skeleton-of-Thought** (Ning et al., 2023) focuses on accelerating answer speed through parallelization. Given a problem, it prompts an LLM to create a skeleton of the answer, in a sense, sub-problems to be solved. Then, in parallel, it sends these questions to a LLM and concatenates all the outputs to get a final response.
 
-as well as GenAI (Patel et al., 2022). Some decom-planations to the CoT prompt in order to show the
+**Plan-and-Solve Prompting** (Wang et al., 2023f) consists of an improved Zero-Shot CoT prompt, "Let's first understand the problem and devise a plan to solve it. Then, let's carry out the plan and solve the problem step by step". This method generates more robust reasoning processes than standard Zero-Shot-CoT on multiple reasoning datasets.
 
-position techniques are similar to thought-inducing
+**Tree-of-Thought (ToT)** (Yao et al., 2023b), also known as Tree of Thoughts, (Long, 2023), creates a tree-like search problem by starting with an initial problem then generating multiple possible steps in the form of thoughts (as from a CoT). It evaluates the progress each step makes towards solving the problem (through prompting) and decides which steps to continue with, then keeps creating more thoughts. ToT is particularly effective for tasks that require search and planning.
 
-LLM how not to reason. This method has shown
+**Recursion-of-Thought** (Lee and Kim, 2023) is similar to regular CoT. However, every time it encounters a complicated problem in the middle of its reasoning chain, it sends this problem into another prompt/LLM call. After this is completed, the answer is inserted into the original prompt. In this way, it can recursively solve complex problems, including ones which might otherwise run over that maximum context length. This method has shown improvements on arithmetic and algorithmic tasks. Though implemented using fine-tuning to output a special token that sends sub-problem into another prompt, it could also be done only through prompting.
 
-techniques, such as CoT, which often naturally
+**Metacognitive Prompting** (Wang and Zhao, 2024) attempts to make the LLM mirror human metacognitive processes with a five part prompt chain, with steps including clarifying the question, preliminary judgement, evaluation of response, decision confirmation, and confidence assessment.
 
-significant improvement in areas like Arithmetic
+### 2.2.4 Ensembling
 
-breaks down problems into simpler components. 
+In GenAI, ensembling is the process of using multiple prompts to solve the same problem, then aggregating these responses into a final output. In many cases, a majority vote—selecting the most frequent response—is used to generate the final output. Ensembling techniques reduce the variance of LLM outputs and often improving accuracy, but come with the cost of increasing the number of model calls needed to reach a final answer.
 
-Reasoning and Factual QA. 
+**Demonstration Ensembling (DENSE)** (Khalifa et al., 2023) creates multiple few-shot prompts, each containing a distinct subset of exemplars from the training set. Next, it aggregates over their outputs to generate a final response.
 
-However, explicitly breaking down problems can
+**Mixture of Reasoning Experts (MoRE)** (Si et al., 2023d) creates a set of diverse reasoning experts by using different specialized prompts for different reasoning types (such as retrieval augmentation prompts for factual reasoning, Chain-of-Thought reasoning for multi-hop and math reasoning, and generated knowledge prompting for commonsense reasoning). The best answer from all experts is selected based on an agreement score.
 
-further improve LLMs' problem solving ability. 
+**Max Mutual Information Method** (Sorensen et al., 2022) creates multiple prompt templates with varied styles and exemplars, then selects the optimal template as the one that maximizes mutual information between the prompt and the LLM's outputs.
 
-Uncertainty-Routed CoT Prompting
+**Self-Consistency** (Wang et al., 2022) is based on the intuition that multiple different reasoning paths can lead to the same answer. This method first prompts the LLM multiple times to perform CoT, crucially with a non-zero temperature to elicit diverse reasoning paths. Next, it uses a majority vote over all generated responses to select a final response. Self-Consistency has shown improvements on arithmetic, commonsense, and symbolic reasoning tasks.
 
-(Google, 
-
-2023) samples multiple CoT reasoning paths, then Least-to-Most Prompting
-
-(Zhou et al., 2022a)
-
-selects the majority if it is above a certain thresh-
-
-starts by prompting a LLM to break a given prob-
-
-old (calculated based on validation data). If not, it
-
-lem into sub-problems without solving them. Then, 
-
-samples greedily and selects that response. This
-
-it solves them sequentially, appending model re-
-
-method demonstrates improvement on the MMLU
-
-sponses to the prompt each time, until it arrives
-
-13
-
-at a final result. This method has shown signif-mathematical and programming-related tasks but
-
-icant improvements in tasks involving symbolic
-
-is less effective for semantic reasoning tasks. 
-
-manipulation, compositional generalization, and
-
-Faithful Chain-of-Thought
-
-(Lyu et al., 2023)
-
-mathematical reasoning. 
-
-generates a CoT that has both natural language and
-
-Decomposed Prompting (DECOMP)
-
-(Khot
-
-symbolic language (e.g. Python) reasoning, just
-
-et al., 2022) Few-Shot prompts a LLM to show it like Program-of-Thoughts. However, it also makes
-
-how to use certain functions. These might include
-
-use of different types of symbolic languages in a
-
-things like string splitting or internet searching; 
-
-task-dependent fashion. 
-
-these are often implemented as separate LLM calls. 
-
-Skeleton-of-Thought
-
-(Ning et al., 2023) focuses
-
-Given this, the LLM breaks down its original prob-
-
-on accelerating answer speed through paralleliza-
-
-lem into sub-problems which it sends to different
-
-tion. Given a problem, it prompts an LLM to create
-
-functions. It has shown improved performance over
-
-a skeleton of the answer, in a sense, sub-problems
-
-Least-to-Most prompting on some tasks. 
-
-to be solved. Then, in parallel, it sends these ques-
-
-Plan-and-Solve Prompting
-
-(Wang et al., 2023f)
-
-tions to a LLM and concatenates all the outputs to
-
-consists of an improved Zero-Shot CoT prompt, 
-
-get a final response. 
-
-"Let's first understand the problem and devise a
-
-Metacognitive Prompting
-
-(Wang and Zhao, 
-
-plan to solve it. Then, let's carry out the plan and
-
-2024) attempts to make the LLM mirror human solve the problem step by step". This method gener-metacognitive processes with a five part prompt
-
-ates more robust reasoning processes than standard
-
-chain, with steps including clarifying the question, 
-
-Zero-Shot-CoT on multiple reasoning datasets. 
-
-preliminary judgement, evaluation of response, de-
-
-cision confirmation, and confidence assessment. 
-
-Tree-of-Thought (ToT)
-
-(Yao et al., 2023b), also
-
-known as Tree of Thoughts, (Long, 2023), creates a ### 2.2.4 Ensembling
-
-tree-like search problem by starting with an initial
-
-problem then generating multiple possible steps in
-
-In GenAI, ensembling is the process of using multi-
-
-the form of thoughts (as from a CoT). It evaluates
-
-ple prompts to solve the same problem, then aggre-
-
-the progress each step makes towards solving the
-
-gating these responses into a final output. In many
-
-problem (through prompting) and decides which
-
-cases, a majority vote—selecting the most frequent
-
-steps to continue with, then keeps creating more
-
-response—is used to generate the final output. En-
-
-thoughts. ToT is particularly effective for tasks that
-
-sembling techniques reduce the variance of LLM
-
-require search and planning. 
-
-outputs and often improving accuracy, but come
-
-with the cost of increasing the number of model
-
-Recursion-of-Thought
-
-(Lee and Kim, 2023) is
-
-calls needed to reach a final answer. 
-
-similar to regular CoT. However, every time it en-
-
-Demonstration Ensembling (DENSE)
-
-(Khalifa
-
-counters a complicated problem in the middle of its
-
-et al., 2023) creates multiple few-shot prompts, reasoning chain, it sends this problem into another
-
-each containing a distinct subset of exemplars from
-
-prompt/LLM call. After this is completed, the an-
-
-the training set. Next, it aggregates over their out-
-
-swer is inserted into the original prompt. In this
-
-puts to generate a final response. 
-
-way, it can recursively solve complex problems, in-
-
-cluding ones which might otherwise run over that
-
-Mixture of Reasoning Experts (MoRE)
-
-(Si et al., 
-
-maximum context length. This method has shown
-
-2023d) creates a set of diverse reasoning experts improvements on arithmetic and algorithmic tasks. 
-
-by using different specialized prompts for different
-
-Though implemented using fine-tuning to output a
-
-reasoning types (such as retrieval augmentation
-
-special token that sends sub-problem into another
-
-prompts for factual reasoning, Chain-of-Thought
-
-prompt, it could also be done only through prompt-
-
-reasoning for multi-hop and math reasoning, and
-
-ing. 
-
-generated knowledge prompting for commonsense
-
-reasoning). The best answer from all experts is
-
-Program-of-Thoughts
-
-(Chen et al., 2023d) uses
-
-selected based on an agreement score. 
-
-LLMs like Codex to generate programming code
-
-as reasoning steps. A code interpreter executes
-
-Max Mutual Information Method
-
-(Sorensen
-
-these steps to obtain the final answer. It excels in
-
-et al., 2022) creates multiple prompt templates with 14
-
-varied styles and exemplars, then selects the opti-Prompt Paraphrasing
-
-(Jiang et al., 2020) trans-
-
-mal template as the one that maximizes mutual
-
-forms an original prompt by changing some of the
-
-information between the prompt and the LLM's
-
-wording, while still maintaining the overall mean-
-
-outputs. 
-
-ing. It is effectively a data augmentation technique
-
-that can be used to generate prompts for an ensem-
-
-Self-Consistency
-
-(Wang et al., 2022) is based
-
-ble. 
-
-on the intuition that multiple different reasoning
-
-paths can lead to the same answer. This method
+**Prompt Paraphrasing** (Jiang et al., 2020) transforms an original prompt by changing some of the wording, while still maintaining the overall meaning. It is effectively a data augmentation technique that can be used to generate prompts for an ensemble.
 
 ### 2.2.5 Self-Criticism
 
-first prompts the LLM multiple times to perform
+When creating GenAI systems, it can be useful to have LLMs criticize their own outputs (Huang et al., 2022). This could simply be a judgement (e.g., is this output correct) or the LLM could be prompted to provide feedback, which is then used to improve the answer. Many approaches to generating and integrating self-criticism have been developed.
 
-CoT, crucially with a non-zero temperature to elicit
+**Self-Calibration** (Kadavath et al., 2022) first prompts an LLM to answer a question. Then, it builds a new prompt that includes the question, the LLM's answer, and an additional instruction asking whether the answer is correct. This can be useful for gauging confidence levels when applying LLMs when deciding when to accept or revise the original answer.
 
-When creating GenAI systems, it can be useful to
+**Self-Refine** (Madaan et al., 2023) is an iterative framework where, given an initial answer from the LLM, it prompts the same LLM to provide feedback on the answer, and then prompts the LLM to improve the answer based on the feedback. This iterative process continues until a stopping condition is met (e.g., max number of steps reached). Self-Refine has demonstrated improvement across a range of reasoning, coding, and generation tasks.
 
-diverse reasoning paths. Next, it uses a majority
+**Reversing Chain-of-Thought (RCoT)** (Xue et al., 2023) first prompts LLMs to reconstruct the problem based on generated answer. Then, it generates fine-grained comparisons between the original problem and the reconstructed problem as a way to check for any inconsistencies. These inconsistencies are then converted to feedback for the LLM to revise the generated answer.
 
-have LLMs criticize their own outputs (Huang et al., 
+**Universal Self-Consistency** (Chen et al., 2023e) is similar to Self-Consistency except that rather than selecting the majority response by programmatically counting how often it occurs, it inserts all outputs into a prompt template that selects the majority answer. This is helpful for free-form text generation and cases where the same answer may be output slightly differently by different prompts.
 
-vote over all generated responses to select a final
+**Meta-Reasoning over Multiple CoTs** (Yoran et al., 2023) is similar to universal Self-Consistency; it first generates multiple reasoning chains (but not necessarily final answers) for a given problem. Next, it inserts all of these chains in a single prompt template then generates a final answer from them.
 
-2022). This could simply be a judgement (e.g., is response. Self-Consistency has shown improve-this output correct) or the LLM could be prompted
+**DiVeRSe** (Li et al., 2023i) creates multiple prompts for a given problem then performs Self-Consistency for each, generating multiple reasoning paths. They score reasoning paths based on each step in them then select a final response.
 
-ments on arithmetic, commonsense, and symbolic
+**Consistency-based Self-adaptive Prompting (COSP)** (Wan et al., 2023a) constructs Few-Shot CoT prompts by running Zero-Shot CoT with Self-Consistency on a set of examples then selecting a high agreement subset of the outputs to be included in the final prompt as exemplars. It again performs Self-Consistency with this final prompt.
 
-to provide feedback, which is then used to improve
+**Universal Self-Adaptive Prompting (USP)** (Wan et al., 2023b) builds upon the success of COSP, aiming to make it generalizable to all tasks. USP makes use of unlabeled data to generate exemplars and a more complicated scoring function to select them. Additionally, USP does not use Self-Consistency.
 
-reasoning tasks. 
+**Self-Verification** (Weng et al., 2022) generates multiple candidate solutions with Chain-of-Thought (CoT). It then scores each solution by masking certain parts of the original question and asking an LLM to predict them based on the rest of the question and the generated solution. This method has shown improvement on eight reasoning datasets.
 
-the answer. Many approaches to generating and
+**Chain-of-Verification (COVE)** (Dhuliawala et al., 2023) first uses an LLM to generate an answer to a given question. Then, it creates a list of related questions that would help verify the correctness of the answer. Each question is answered by the LLM, then all the information is given to the LLM to produce the final revised answer. This method has shown improvements in various question-answering and text-generation tasks.
 
-integrating self-criticism have been developed. 
-
-Universal Self-Consistency
-
-(Chen et al., 2023e)
-
-is similar to Self-Consistency except that rather
-
-Self-Calibration
-
-(Kadavath et al., 2022) first
-
-than selecting the majority response by program-
-
-prompts an LLM to answer a question. Then, it
-
-matically counting how often it occurs, it inserts
-
-builds a new prompt that includes the question, the
-
-all outputs into a prompt template that selects the
-
-LLM's answer, and an additional instruction asking
-
-majority answer. This is helpful for free-form text
-
-whether the answer is correct. This can be useful
-
-generation and cases where the same answer may
-
-for gauging confidence levels when applying LLMs
-
-be output slightly differently by different prompts. 
-
-when deciding when to accept or revise the original
-
-answer. 
-
-Meta-Reasoning over Multiple CoTs
-
-(Yoran
-
-et al., 2023) is similar to universal Self-Self-Refine
-
-(Madaan et al., 2023) is an iterative
-
-Consistency; it first generates multiple reasoning
-
-framework where, given an initial answer from the
-
-chains (but not necessarily final answers) for a
-
-LLM, it prompts the same LLM to provide feed-
-
-given problem. Next, it inserts all of these chains
-
-back on the answer, and then prompts the LLM to
-
-in a single prompt template then generates a final
-
-improve the answer based on the feedback. This
-
-answer from them. 
-
-iterative process continues until a stopping condi-
-
-tion is met (e.g., max number of steps reached). 
-
-DiVeRSe
-
-(Li et al., 2023i)
-
-creates multiple
-
-Self-Refine has demonstrated improvement across
-
-prompts for a given problem then performs Self-
-
-a range of reasoning, coding, and generation tasks. 
-
-Consistency for each, generating multiple reason-
-
-ing paths. They score reasoning paths based on
-
-Reversing
-
-Chain-of-Thought
-
-(RCoT)
-
-(Xue
-
-each step in them then select a final response. 
-
-et al., 2023) first prompts LLMs to reconstruct Consistency-based
-
-Self-adaptive
-
-Prompting
-
-the problem based on generated answer. Then, it
-
-(COSP)
-
-(Wan et al., 2023a) constructs Few-Shot
-
-generates fine-grained comparisons between the
-
-CoT prompts by running Zero-Shot CoT with
-
-original problem and the reconstructed problem
-
-Self-Consistency on a set of examples then
-
-as a way to check for any inconsistencies. These
-
-selecting a high agreement subset of the outputs
-
-inconsistencies are then converted to feedback for
-
-to be included in the final prompt as exemplars. It
-
-the LLM to revise the generated answer. 
-
-again performs Self-Consistency with this final
-
-Self-Verification
-
-prompt. 
-
-(Weng et al., 2022)
-
-gener-
-
-ates multiple candidate solutions with Chain-of-
-
-Universal Self-Adaptive Prompting (USP)
-
-(Wan
-
-Thought (CoT). It then scores each solution by
-
-et al., 2023b) builds upon the success of COSP, aim-masking certain parts of the original question and
-
-ing to make it generalizable to all tasks. USP makes
-
-asking an LLM to predict them based on the rest
-
-use of unlabeled data to generate exemplars and a
-
-of the question and the generated solution. This
-
-more complicated scoring function to select them. 
-
-method has shown improvement on eight reasoning
-
-Additionally, USP does not use Self-Consistency. 
-
-datasets. 
-
-15
-
-Chain-of-Verification
-
-(COVE)
-
-(Dhuliawala
-
-any mentioned dataset or model from the body of
-
-et al., 2023) first uses an LLM to generate an papers in our dataset. After, we manually filtered
-
-answer to a given question. Then, it creates a
-
-out results that were not models or datasets. The
-
-list of related questions that would help verify
-
-citation counts were acquired by searching items
-
-the correctness of the answer. Each question is
-
-from the finalized list on Semantic Scholar. 
-
-answered by the LLM, then all the information
-
-is given to the LLM to produce the final revised
-
-## 2.4 Prompt Engineering
-
-answer. This method has shown improvements in
-
-In addition to surveying prompting techniques, we
-
-various question-answering and text-generation
-
-also review prompt engineering techniques, which
-
-tasks. 
-
-are used to automatically optimize prompts. We
-
-Cumulative Reasoning
-
-(Zhang et al., 2023b)
-
-discuss some techniques that use gradient updates, 
-
-first generates several potential steps in answering
-
-since the set of prompt engineering techniques is
-
-the question. It then has a LLM evaluate them, de-
-
-much smaller than that of prompting techniques. 
-
-ciding to either accept or reject these steps. Finally, 
-
-Meta Prompting
-
-is the process of prompting a
-
-it checks whether it has arrived at the final answer. 
-
-LLM to generate or improve a prompt or prompt
-
-If so, it terminates the process, but otherwise it
-
-template (Reynolds and McDonell, 2021; Zhou
-
-repeats it. This method has demonstrated improve-
-
-et al., 2022b; Ye et al., 2023). This is often done ments in logical inference tasks and mathematical
-
-without any scoring mechanism, using just a sim-
-
-problem. 
-
-ple template (Figure 2.12). However, other works present more complex uses of meta-prompting, 
+**Cumulative Reasoning** (Zhang et al., 2023b) first generates several potential steps in answering the question. It then has a LLM evaluate them, deciding to either accept or reject these steps. Finally, it checks whether it has arrived at the final answer. If so, it terminates the process, but otherwise it repeats it. This method has demonstrated improvements in logical inference tasks and mathematical problem.
 
 ## 2.3 Prompting Technique Usage
 
-with multiple iterations and scoring mechanisms
+As we have just seen, there exist many text-based prompting techniques. However, only a small subset of them are commonly used in research and in industry. We measure technique usage by proxy of measuring the number of citations by other papers in our dataset. We do so with the presumption that papers about prompting are more likely to actually use or evaluate the cited technique. We graph the top 25 papers cited in this way from our dataset and find that most of them propose new prompting techniques (Figure 2.11). The prevalence of citations for Few-Shot and Chain-of-Thought prompting is unsurprising and helps to establish a baseline for understanding the prevalence of other techniques.
 
-As we have just seen, there exist many text-based
+### 2.3.1 Benchmarks
 
-Yang et al. (2023a); Fernando et al. (2023). 
+In prompting research, when researchers propose a new technique, they usually benchmark it across multiple models and datasets. This is important to prove the utility of the technique and examine how it transfers across models.
 
-prompting techniques. However, only a small sub-
+In order to make it easier for researchers proposing new techniques to know how to benchmark them, we quantitatively examine which models (Figure 2.9) and what benchmark datasets (Figure 2.10) are being used. Again, we measure usage by how many times papers in our dataset cite the benchmark datasets and models.
 
-set of them are commonly used in research and in
+To find which datasets and models are being used, we prompted GPT-4-1106-preview to extract any mentioned dataset or model from the body of papers in our dataset. After, we manually filtered out results that were not models or datasets. The citation counts were acquired by searching items from the finalized list on Semantic Scholar.
 
+## 2.4 Prompt Engineering
+
+In addition to surveying prompting techniques, we also review prompt engineering techniques, which are used to automatically optimize prompts. We discuss some techniques that use gradient updates, since the set of prompt engineering techniques is much smaller than that of prompting techniques.
+
+**Meta Prompting** is the process of prompting a LLM to generate or improve a prompt or prompt template (Reynolds and McDonell, 2021; Zhou et al., 2022b; Ye et al., 2023). This is often done without any scoring mechanism, using just a simple template (Figure 2.12). However, other works present more complex uses of meta-prompting, with multiple iterations and scoring mechanisms Yang et al. (2023a); Fernando et al. (2023).
+
+**Figure 2.12: A simple Meta Prompting template**
+
+```
 Improve the following prompt: {PROMPT}
+```
 
-industry. We measure technique usage by proxy of
+**AutoPrompt** (Shin et al., 2020b) uses a frozen LLM as well as a prompt template that includes some "trigger tokens", whose values are updated via backpropogation at training time. This is a version of soft-prompting.
 
-measuring the number of citations by other papers
+**Automatic Prompt Engineer (APE)** (Zhou et al., 2022b) uses a set of exemplars to generate a Zero-Shot instruction prompt. It generates multiple possible prompts, scores them, then creates variations of the best ones (e.g. by using prompt paraphrasing). It iterates on this process until some desiderata are reached.
 
-in our dataset. We do so with the presumption that
+**Gradientfree Instructional Prompt Search (GrIPS)** (Prasad et al., 2023) is similar to APE, but uses a more complex set of operations including deletion, addition, swapping, and paraphrasing in order to create variations of a starting prompt.
 
-Figure 2.12: A simple Meta Prompting template. 
+**Prompt Optimization with Textual Gradients (ProTeGi)** (Pryzant et al., 2023) is a unique approach to prompt engineering that improves a prompt template through a multi-step process. First, it passes a batch of inputs through the template, then passes the output, ground truth, and prompt into another prompt that criticizes the original prompt. It generates new prompts from these criticisms then uses a bandit algorithm (Gabillon et al., 2011) to select one. ProTeGi demonstrates improvements over methods like APE and GRIPS.
 
-papers about prompting are more likely to actually
+**RLPrompt** (Deng et al., 2022) uses a frozen LLM with an unfrozen module added. It uses this LLM to generate prompt templates, scores the templates on a dataset, and updates the unfrozen module using Soft Q-Learning (Guo et al., 2022). Interestingly, the method often selects grammatically nonsensical text as the optimal prompt template.
 
-use or evaluate the cited technique. We graph the
-
-AutoPrompt
-
-(Shin et al., 2020b) uses a frozen
-
-top 25 papers cited in this way from our dataset and
-
-LLM as well as a prompt template that includes
-
-find that most of them propose new prompting tech-
-
-some "trigger tokens", whose values are updated
-
-niques (Figure 2.11). The prevalence of citations via backpropogation at training time. This is a
-
-for Few-Shot and Chain-of-Thought prompting is
-
-version of soft-prompting. 
-
-unsurprising and helps to establish a baseline for
-
-understanding the prevalence of other techniques. 
-
-Automatic Prompt Engineer (APE)
-
-(Zhou et al., 
-
-2022b) uses a set of exemplars to generate a Zero-### 2.3.1 Benchmarks
-
-Shot instruction prompt. It generates multiple pos-
-
-In prompting research, when researchers propose
-
-sible prompts, scores them, then creates variations
-
-a new technique, they usually benchmark it across
-
-of the best ones (e.g. by using prompt paraphras-
-
-multiple models and datasets. This is important to
-
-ing). It iterates on this process until some desider-
-
-prove the utility of the technique and examine how
-
-ata are reached. 
-
-it transfers across models. 
-
-Gradientfree
-
-Instructional
-
-Prompt
-
-Search
-
-In order to make it easier for researchers propos-
-
-(GrIPS)
-
-(Prasad et al., 2023) is similar to APE, ing new techniques to know how to benchmark
-
-but uses a more complex set of operations includ-
-
-them, we quantitatively examine which models
-
-ing deletion, addition, swapping, and paraphrasing
-
-(Figure 2.9) and what benchmark datasets (Fig-in order to create variations of a starting prompt. 
-
-ure 2.10) are being used. Again, we measure usage by how many times papers in our dataset cite the
-
-Prompt Optimization with Textual Gradients (Pro-
-
-benchmark datasets and models. 
-
-TeGi)
-
-(Pryzant et al., 2023) is a unique approach To find which datasets and models are being
-
-to prompt engineering that improves a prompt tem-
-
-used, we prompted GPT-4-1106-preview to extract
-
-plate through a multi-step process. First, it passes
-
-16
-
-100
-
-200
-
-300
-
-Count 400 500
-
-1
-
-1 Counts 1
-
-1
-
-0
-
-Few-Shot L
-
-0
-
-0
-
-0
-
-0
-
-0
-
-1
-
-2
-
-3
-
-GPT
-
-Zer
-
-Good In-Conte
-
--3
-
-o
-
-BER
-
--Shot R ear
-
-GPT
-
-Counts of Model Mentions in Dataset
-
-R
-
-T
-
-ning\*
-
-easoning\*
-
--4
-
-oBER
-
-xt Examples
-
-P Ta
-
-Pr Self
-
-aLM
-
-ompt Or
-
-LLaMA
-
--Consistency\*
-
-Least-to
-
-BAR
-
-der Sensitivity
-
--Most P
-
-T
-
-Codex
-
-InstructGPT
-
-OPT
-
-P
-
-Human-L r
-
-r
-
-ompting\*
-
-ompt R
-
-BLOOM
-
-evel P etrieval
-
-FL
-
-r
-
-Citation Counts of P
-
-AN
-
-Model Name
-
-ompting
-
-Automatic CoT\*
-
-CLIP
-
-SAM
-
-BioBER
-
-T
-
-Lambda
-
-Comple
-
-r
-
-P
-
-Self
-
-ee of Thoughts\*
-
-r
-
-T
-
-Flamingo
-
--Ask\*
-
-ogram of Thoughts\*
-
-Vision T
-
-xity
-
-BLOOMZ
-
--Based P
-
-CoCoOp
-
-ransfor
-
-r
-
-Decomposed P ompting\*
-
-mer
-
-Self
-
-BLIP
-
--R
-
--2
-
-Codellama
-
-efine\*
-
-VLP
-
-r
-
-Self ompting\*
-
-In-conte
-
-F
-
--Evaluation\*
-
-Maieutic P
-
-inBER
-
-Gr
-
-LLaV
-
-GatorT
-
-xt L
-
-T
-
-ounding DINO
-
-r
-
-ear ompting\*
-
-Dr
-
-A
-
-P
-
-ning Survey
-
-Graph of Thoughts\*
-
-eamF ron
-
-rompting T
-
-LLMs as Optimizers
-
-usion
-
-A
-
-Plan-and-Solve P
-
-ctive P
-
-r
-
-r
-
-echniques
-
-ompting T
-
-ompting\*
-
-rompting\*
-
-Faithful CoT\*
-
-Support Examples
-
-Figure 2.9: Citation Counts of GenAI Models
-
-kNN P
-
-Unified Demo R
-
-200
-
-400
-
-600
-
-800
-
-Number of Mentions
-
-rompting\*
-
-0
-
-Tree- etriever\*
-
-GSM8K
-
-of
-
-Step-
-
--Thought\*
-
-echniques
-
-Automate-CoT\*
-
-Aware V
-
-MML
-
-Self erification\*
-
--Generated ICL\*
-
-Question Decomposition
-
-U
-
-Dataset Mentions in P
-
-Deductive V
-
-BBH
-
-CommonsenseQA
-
-Cumulative R
-
-erification\*
-
-Chain-
-
-Self
-
-easoning\*
-
--A of-V
-
-daptive P
-
-Demonstration Ensembling
-
-HellaSwag
-
-erification\*
-
-Dataset Name
-
-rompting\*
-
-Memory
-
-BIG-bench
-
-Rephrase and R
-
--of-Thought\*
-
-WinoGrande
-
-espond\*
-
-QASC
-
-apers
-
-AQUA-RAT
-
-T
-
-Figure 2.11: Citation Counts of Prompting Techniques. 
-
-ruthfulQA
-
-The top 25 papers in our dataset, measured by how often
-
-they are cited by other papers in our dataset. Most pa-
-
-pers here are prompting techniques\*, and the remaining
-
-papers contains prompting advice. 
-
-Figure 2.10: Citation Counts of Datasets
-
-17
-
-LLM Response
-
-a batch of inputs through the template, then passes
-
-the output, ground truth, and prompt into another
-
-Likely Negative
-
-prompt that criticizes the original prompt. It gener-
-
-Answer Shape:
-
-A span of tokens
-
-This is negative
-
-ates new prompts from these criticisms then uses
-
-NEGATIVE \! 
-
-a bandit algorithm (Gabillon et al., 2011) to select one. ProTeGi demonstrates improvements over
-
-methods like APE and GRIPS. 
-
-Answer Space:
-
-Answer Extraction:
-
-All possible spans of tokens
-
-Select the proper label
-
-RLPrompt
-
-(Deng et al., 2022) uses a frozen LLM
-
-with an unfrozen module added. It uses this LLM to
-
-Figure 2.13: An annotated output of a LLM output for a
-
-generate prompt templates, scores the templates on
-
-labeling task, which shows the three design decisions of
-
-answer engineering: the choice of answer shape, space, 
-
-a dataset, and updates the unfrozen module using
-
-and extractor. Since this is an output from a classifi-
-
-Soft Q-Learning (Guo et al., 2022). Interestingly, cation task, the answer shape could be restricted to a
-
-the method often selects grammatically nonsensical
-
-single token and the answer space to one of two tokens
-
-text as the optimal prompt template. 
-
-("positive" or "negative"), though they are unrestricted in this image. 
-
-Dialogue-comprised Policy-gradient-based Dis-
-
-crete Prompt Optimization (DP2O)
-
-(Li et al., 
-
-2023b) is perhaps the most complicated prompt en-### 2.5.1 Answer Shape
-
-gineering technique, involving reinforcement learn-
-
-The shape of an answer is its physical format. For
-
-ing, a custom prompt scoring function, and conver-
-
-example, it could be a token, span of tokens, or
-
-sations with an LLM to construct the prompt. 
-
-even an image or video.7 It is sometimes useful to restrict the output shape of a LLM to a single token
+**Dialogue-comprised Policy-gradient-based Discrete Prompt Optimization (DP2O)** (Li et al., 2023b) is perhaps the most complicated prompt engineering technique, involving reinforcement learning, a custom prompt scoring function, and conversations with an LLM to construct the prompt.
 
 ## 2.5 Answer Engineering
 
-for tasks like binary classification. 
+Answer engineering is the iterative process of developing or selecting among algorithms that extract precise answers from LLM outputs. To understand the need for answer engineering, consider a binary classification task where the labels are "Hate Speech" and "Not Hate Speech". The prompt template might look like this:
 
-Answer engineering is the iterative process of de-
+```
+Is this "Hate Speech" or "Not Hate Speech": {TEXT}
+```
+
+When a hate speech sample is put through the template, it might have outputs such as "It's hate speech", "Hate Speech.", or even "Hate speech, because it uses negative language against a racial group". This variance in response formats is difficult to parse consistently; improved prompting can help, but only to a certain extent.
+
+There are three design decisions in answer engineering, the choice of answer space, answer shape, and answer extractor (Figure 2.13). Liu et al. (2023b) define the first two as necessary components of answer engineering and we append the third. We consider answer engineering to be distinct from prompt engineering, but extremely closely related; the processes are often conducted in tandem.
+
+**Figure 2.13: An annotated output of a LLM output for a labeling task**
+
+```
+LLM Response
+
+Likely Negative
+
+Answer Shape:
+A span of tokens
+
+This is negative
+NEGATIVE! 
+
+Answer Space:
+All possible spans of tokens
+
+Answer Extraction:
+Select the proper label
+```
+
+This shows the three design decisions of answer engineering: the choice of answer shape, space, and extractor. Since this is an output from a classification task, the answer shape could be restricted to a single token and the answer space to one of two tokens ("positive" or "negative"), though they are unrestricted in this image.
+
+### 2.5.1 Answer Shape
+
+The shape of an answer is its physical format. For example, it could be a token, span of tokens, or even an image or video.7 It is sometimes useful to restrict the output shape of a LLM to a single token for tasks like binary classification.
 
 ### 2.5.2 Answer Space
 
-veloping or selecting among algorithms that extract
-
-The space of an answer is the domain of values
-
-precise answers from LLM outputs. To understand
-
-that its structure may contain. This may simply be
-
-the need for answer engineering, consider a bi-
-
-the space of all tokens, or in a binary labeling task, 
-
-nary classification task where the labels are "Hate
-
-could just be two possible tokens. 
-
-Speech" and "Not Hate Speech". The prompt template might look like this:
+The space of an answer is the domain of values that its structure may contain. This may simply be the space of all tokens, or in a binary labeling task, could just be two possible tokens.
 
 ### 2.5.3 Answer Extractor
 
-In cases where it is impossible to entirely control
+In cases where it is impossible to entirely control the answer space (e.g. consumer-facing LLMs), or the expected answer may be located somewhere within the model output, a rule can be defined to extract the final answer. This rule is often a simple function (e.g. a regular expression), but can also use a separate LLM to extract the answer.
 
-Is this "Hate Speech" or "Not Hate Speech": the answer space (e.g. consumer-facing LLMs), or
+**Verbalizer**: Often used in labeling tasks, a verbalizer maps a token, span, or other type of output to a label and vice-versa (injective) (Schick and Schütze, 2021). For example, if we wish for a model to predict whether a Tweet is positive or negative, we could prompt it to output either "+" or "-" and a verbalizer would map these token sequences to the appropriate labels. The selection of a verbalizer constitutes a component of answer engineering.
 
-{TEXT}
+**Regex**: As mentioned previously, Regexes are often used to extract answers. They are usually used to search for the first instance of a label. However, depending on the output format and whether CoTs are generated, it may be better to search for the last instance.
 
-the expected answer may be located somewhere
+**Separate LLM**: Sometimes outputs are so complicated that regexes won't work consistently. In this case, it can be useful to have a separate LLM evaluate the output and extract an answer. This separate LLM will often use an answer trigger (Kojima et al., 2022), e.g. "The answer (Yes or No) is", to extract the answer.
 
-within the model output, a rule can be defined to
+7We use a different definition than Liu et al. (2023b) with respect to granularity (e.g. token vs span), since the output could be of a different modality.
 
-When a hate speech sample is put through the
+**Figure 2.9: Model Mention Counts in Dataset**
 
-extract the final answer. This rule is often a simple
+| Model Name | Mentions |
+|------------|----------|
+| GPT | 800+ |
+| BERT | 600+ |
+| LLaMA | 400+ |
+| Codex | 300+ |
+| InstructGPT | 250+ |
+| OPT | 200+ |
+| BLOOM | 150+ |
+| PaLM | 150+ |
+| CLIP | 100+ |
+| Lambda | 75+ |
 
-template, it might have outputs such as "It's hate
+**Figure 2.10: Dataset Mention Counts in Prompting Papers**
 
-function (e.g. a regular expression), but can also
+| Dataset Name | Mentions |
+|--------------|----------|
+| GSM8K | 200+ |
+| BBH | 150+ |
+| CommonsenseQA | 120+ |
+| HellaSwag | 100+ |
+| BIG-bench | 90+ |
+| WinoGrande | 80+ |
+| QASC | 70+ |
+| AQUA-RAT | 60+ |
+| TruthfulQA | 50+ |
 
-speech", "Hate Speech.", or even "Hate speech, use a separate LLM to extract the answer. 
+**Figure 2.11: Citation Counts of Prompting Techniques**
 
-because it uses negative language against a racial
+The top 25 papers in our dataset, measured by how often they are cited by other papers in our dataset. Most papers here are prompting techniques*, and the remaining papers contain prompting advice.
 
-Verbalizer
+| Technique | Citations |
+|-----------|-----------|
+| Chain-of-Thought* | 400+ |
+| Self-Consistency* | 250+ |
+| Zero-Shot Reasoning* | 200+ |
+| Few-Shot Prompting* | 180+ |
+| Automatic CoT* | 150+ |
+| Tree of Thoughts* | 120+ |
+| Step-Back Prompting* | 100+ |
+| Self-Ask* | 90+ |
+| Program of Thoughts* | 80+ |
+| Graph of Thoughts* | 70+ |
+| Plan-and-Solve Prompting* | 60+ |
+| Faithful CoT* | 50+ |
+| Memory-of-Thought* | 45+ |
+| Self-Evaluation* | 40+ |
+| Maieutic Prompting* | 35+ |
 
-Often used in labeling tasks, a verbal-
+*Techniques marked with asterisk are novel prompting methods proposed in the respective papers.
 
-group". This variance in response formats is diffi-
+**ProTeGi** takes a batch of inputs through the template, then passes the output, ground truth, and prompt into another prompt that criticizes the original prompt. It generates new prompts from these criticisms then uses a bandit algorithm (Gabillon et al., 2011) to select one. ProTeGi demonstrates improvements over methods like APE and GRIPS.
 
-izer maps a token, span, or other type of output
+**RLPrompt** (Deng et al., 2022) uses a frozen LLM with an unfrozen module added. It uses this LLM to generate prompt templates, scores the templates on a dataset, and updates the unfrozen module using Soft Q-Learning (Guo et al., 2022). Interestingly, the method often selects grammatically nonsensical text as the optimal prompt template.
 
-cult to parse consistently; improved prompting can
+**Figure 2.13: Answer Engineering Design Decisions**
 
-to a label and vice-versa (injective) (Schick and
+```
+LLM Response: "This is negative NEGATIVE!"
 
-help, but only to a certain extent. 
+Answer Shape: A span of tokens
+Answer Space: All possible spans of tokens  
+Answer Extraction: Select the proper label
+Result: "Likely Negative"
+```
 
-Schütze, 2021). For example, if we wish for a There are three design decisions in answer en-model to predict whether a Tweet is positive or
+Figure 2.13: An annotated output of a LLM output for a labeling task, which shows the three design decisions of answer engineering: the choice of answer shape, space, and extractor. Since this is an output from a classification task, the answer shape could be restricted to a single token and the answer space to one of two tokens ("positive" or "negative"), though they are unrestricted in this image.
 
-gineering, the choice of answer space, answer
+**Dialogue-comprised Policy-gradient-based Discrete Prompt Optimization (DP2O)** (Li et al., 2023b) is perhaps the most complicated prompt engineering technique, involving reinforcement learning, a custom prompt scoring function, and conversations with an LLM to construct the prompt.
 
-negative, we could prompt it to output either "\+" 
+## 2.5 Answer Engineering
 
-shape, and answer extractor (Figure 2.13). Liu
+Answer engineering is the iterative process of developing or selecting among algorithms that extract precise answers from LLM outputs. To understand the need for answer engineering, consider a binary classification task where the labels are "Hate Speech" and "Not Hate Speech". The prompt template might look like this:
 
-or "-" and a verbalizer would map these token se-
+```
+Is this "Hate Speech" or "Not Hate Speech": {TEXT}
+```
 
-et al. (2023b) define the first two as necessary quences to the appropriate labels. The selection
+When a hate speech sample is put through the template, it might have outputs such as "It's hate speech" or other variations that don't exactly match the expected labels.
 
-components of answer engineering and we append
+### 2.5.1 Answer Shape
 
-of a verbalizer constitutes a component of answer
+The shape of an answer is its physical format. For example, it could be a token, span of tokens, or even an image or video.7 It is sometimes useful to restrict the output shape of a LLM to a single token for tasks like binary classification.
 
-the third. We consider answer engineering to be
+### 2.5.2 Answer Space
 
-engineering. 
+The space of an answer is the domain of values that its structure may contain. This may simply be the space of all tokens, or in a binary labeling task, could just be two possible tokens.
 
-distinct from prompt engineering, but extremely
+### 2.5.3 Answer Extractor
 
-7We use a different definition than Liu et al. (2023b) with closely related; the processes are often conducted
+In cases where it is impossible to entirely control the answer space (e.g. consumer-facing LLMs), or the expected answer may be located somewhere within the model output, a rule can be defined to extract the final answer. This rule is often a simple function (e.g. a regular expression), but can also use a separate LLM to extract the answer.
 
-respect to granularity (e.g. token vs span), since the output in tandem. 
+For example, outputs might include variations like "speech", "Hate Speech.", or even "Hate speech, because it uses negative language against a racial group". This variance in response formats is difficult to parse consistently; improved prompting can help, but only to a certain extent.
 
-could be of a different modality. 
+There are three design decisions in answer engineering: the choice of answer space, answer shape, and answer extractor (Figure 2.13). Liu et al. (2023b) define the first two as necessary components of answer engineering and we append the third. We consider answer engineering to be distinct from prompt engineering, but extremely closely related; the processes are often conducted in tandem.
 
-18
+**Verbalizer**: Often used in labeling tasks, a verbalizer maps a token, span, or other type of output to a label and vice-versa (injective) (Schick and Schütze, 2021). For example, if we wish for a model to predict whether a Tweet is positive or negative, we could prompt it to output either "+" or "-" and a verbalizer would map these token sequences to the appropriate labels. The selection of a verbalizer constitutes a component of answer engineering.
 
-Regex
+**Regex**: Regular expressions can be used to extract specific patterns from LLM outputs. As mentioned previously, regexes are often used to extract answers. They are usually used to search for the first instance of a label. However, depending on the output format and whether CoTs are generated, it may be better to search for the last instance.
 
-As mentioned previously, Regexes are of-
+**Separate LLM**: Sometimes outputs are so complicated that regexes won't work consistently. In this case, it can be useful to have a separate LLM evaluate the output and extract an answer. This separate LLM will often use an answer trigger (Kojima et al., 2022), e.g. "The answer (Yes or No) is", to extract the answer.
 
-ten used to extract answers. They are usually used
-
-to search for the first instance of a label. However, 
-
-depending on the output format and whether CoTs
-
-are generated, it may be better to search for the last
-
-instance. 
-
-Separate LLM
-
-Sometimes outputs are so com-
-
-plicated that regexes won't work consistently. In
-
-this case, it can be useful to have a separate LLM
-
-evaluate the output and extract an answer. This
-
-separate LLM will often use an answer trigger
-
-(Kojima et al., 2022), e.g. "The answer (Yes or No) is", to extract the answer. 
-
-19
+7We use a different definition than Liu et al. (2023b) with respect to granularity (e.g. token vs span), since the output could be of a different modality.
