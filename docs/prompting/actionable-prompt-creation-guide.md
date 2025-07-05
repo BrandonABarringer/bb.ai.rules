@@ -21,14 +21,14 @@
 ---
 
 ## Section 1: Core Prompt Structure & Components
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 ### 1.1 Essential Prompt Components
 
 Every effective prompt should consider these six key components as defined by Schulhoff et al.:
 
 #### **1. Directive** - The Core Intent
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 - **Definition**: "Many prompts issue a directive in the form of an instruction or question. This is the core intent of the prompt, sometimes simply called the 'intent'."
 - **Implementation**: Can be explicit or implicit
@@ -44,7 +44,7 @@ Every effective prompt should consider these six key components as defined by Sc
 - **How to Apply**: Always start with a clear directive, even if other components are added
 
 #### **2. Examples** - Task Demonstrations
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 - **Definition**: "Examples (also called exemplars or shots in academic literature) act as demonstrations that guide the GenAI to accomplish a task."
 - **Implementation**: Show the model what you want through examples
@@ -56,7 +56,7 @@ Every effective prompt should consider these six key components as defined by Sc
 - **How to Apply**: Use when the desired output format or approach isn't immediately obvious from the directive alone
 
 #### **3. Output Formatting** - Structure Control
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 **Why It Matters**: GenAI can output in many formats, but you must specify which one you want.
 
@@ -71,7 +71,7 @@ Custom: "List each item as: [PRIORITY] Task name - brief description"
 **Pro Tip**: Always test your format requirements with simple examples first.
 
 #### **4. Style Instructions** - Tone & Voice Control
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 - **Definition**: "Style instructions are a type of output formatting used to modify the output stylistically rather than structurally."
 - **Implementation**: Use descriptive adjectives and style modifiers
@@ -82,7 +82,7 @@ Custom: "List each item as: [PRIORITY] Task name - brief description"
 - **How to Apply**: Add style instructions to match your audience's needs and communication preferences
 
 #### **5. Role/Persona** - Perspective Setting
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 **Quick Start**: Begin prompts with "You are a [role]..." to set expertise and tone.
 
@@ -95,7 +95,7 @@ Custom: "List each item as: [PRIORITY] Task name - brief description"
 **Best Practice**: Match the role to your desired output quality and audience level.
 
 #### **6. Additional Information** - Supporting Context
-*(Source: 01-introduction.md, Section 1.2.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.2.1)*
 
 **Essential Context Checklist**:
 - ✅ **Names/IDs**: Include specific names, user IDs, or system identifiers
@@ -106,7 +106,7 @@ Custom: "List each item as: [PRIORITY] Task name - brief description"
 **Example**: "Write an email to stakeholders about the Q3 budget. My name is Sarah Chen, I'm the CFO, budget is $2.4M, deadline is end of quarter, and this follows up on the August planning meeting."
 
 ### 1.2 Prompt Templates - Reusable Structures
-*(Source: 01-introduction.md, Section 1.1)*
+*(Source: @docs/prompting/prompt-report/01-introduction.md, Section 1.1)*
 
 #### **Template Definition**
 - **Source Quote**: "A prompt template is a function that contains one or more variables which will be replaced by some media (usually text) to create a prompt."
@@ -132,12 +132,12 @@ Classify the tweet as positive or negative:
 ---
 
 ## Section 2: Specific Prompting Techniques
-*(Source: 02-meta-analysis.md, Sections 2.2.1-2.2.6)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Sections 2.2.1-2.2.6)*
 
 ### 2.1 In-Context Learning Techniques
 
 #### **Few-Shot Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.1; Brown et al., 2020)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.1; Brown et al., 2020)*
 
 - **Definition**: "Few-shot prompting is the paradigm where the GenAI learns to complete a task with only a few examples."
 - **Implementation Example**:
@@ -156,7 +156,7 @@ Classify the tweet as positive or negative:
 #### **Zero-Shot Prompting Variants**
 
 ##### **Role Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.1.3)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.1.3)*
 
 - **Implementation**: Assign specific expertise or persona
 - **Example**:
@@ -165,7 +165,7 @@ Classify the tweet as positive or negative:
   ```
 
 ##### **Emotion Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.1.3)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.1.3)*
 
 - **Implementation**: Add emotionally relevant phrases
 - **Example**:
@@ -174,7 +174,7 @@ Classify the tweet as positive or negative:
   ```
 
 ##### **Rephrase and Respond (RaR)**
-*(Source: 02-meta-analysis.md, Section 2.2.1.3)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.1.3)*
 
 - **Implementation**: Instruct model to rephrase before answering
 - **Example**:
@@ -186,7 +186,7 @@ Classify the tweet as positive or negative:
 ### 2.2 Thought Generation Techniques
 
 #### **Zero-Shot Chain-of-Thought (CoT)**
-*(Source: 02-meta-analysis.md, Section 2.2.2.1; Kojima et al., 2022)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.2.1; Kojima et al., 2022)*
 
 - **Definition**: Appending thought-inducing phrases to encourage step-by-step reasoning
 - **Primary Implementation** (most effective):
@@ -201,7 +201,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: Mathematical, logical, or reasoning tasks requiring shown work
 
 #### **Step-Back Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.2.1)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.2.1)*
 
 - **Implementation**: Ask high-level conceptual question first
 - **Example**:
@@ -212,7 +212,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Thread-of-Thought (ThoT)**
-*(Source: 02-meta-analysis.md, Section 2.2.2.1)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.2.1)*
 
 - **Implementation**: Enhanced thought inducer for complex contexts
 - **Example**:
@@ -221,7 +221,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Tabular Chain-of-Thought (Tab-CoT)**
-*(Source: 02-meta-analysis.md, Section 2.2.2.1)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.2.1)*
 
 - **Implementation**: Structure reasoning as markdown table
 - **Example**:
@@ -237,7 +237,7 @@ Classify the tweet as positive or negative:
 ### 2.3 Decomposition Techniques
 
 #### **Least-to-Most Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.3)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.3)*
 
 - **Implementation**: Break complex problems into simpler sub-problems
 - **Example**:
@@ -253,7 +253,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Plan-and-Solve Prompting**
-*(Source: 02-meta-analysis.md, Section 2.2.3)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.3)*
 
 - **Implementation**: Emphasize planning before execution
 - **Example**:
@@ -264,7 +264,7 @@ Classify the tweet as positive or negative:
 ### 2.4 Ensembling Techniques
 
 #### **Self-Consistency**
-*(Source: 02-meta-analysis.md, Section 2.2.4)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.4)*
 
 - **Implementation**: Generate multiple reasoning paths, select most frequent answer
 - **Process**:
@@ -273,10 +273,10 @@ Classify the tweet as positive or negative:
 - **When to Use**: Critical accuracy tasks where multiple model calls are affordable
 
 ### 2.5 Answer Engineering Techniques
-*(Source: 02-meta-analysis.md, Section 2.5)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.5)*
 
 #### **Verbalizer Approach**
-*(Source: 02-meta-analysis.md, Section 2.5.3; Schick and Schütze, 2021)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.5.3; Schick and Schütze, 2021)*
 
 - **Implementation**: Map tokens to labels for classification
 - **Example**:
@@ -287,7 +287,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Answer Trigger**
-*(Source: 02-meta-analysis.md, Section 2.5.3; Kojima et al., 2022)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.5.3; Kojima et al., 2022)*
 
 - **Implementation**: Use specific phrase to extract final answer
 - **Example**:
@@ -297,7 +297,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Contrastive CoT**
-*(Source: 02-meta-analysis.md, Section 2.2.2.2)*
+*(Source: @docs/prompting/prompt-report/02-meta-analysis.md, Section 2.2.2.2)*
 
 - **Implementation**: Show both correct and incorrect reasoning
 - **Example**:
@@ -356,12 +356,12 @@ Classify the tweet as positive or negative:
 ---
 
 ## Section 3: Multilingual & Multimodal Prompting
-*(Source: 03-beyond-english.md, Sections 3.1-3.2)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Sections 3.1-3.2)*
 
 ### 3.1 Multilingual Prompting Techniques
 
 #### **Translate First Prompting**
-*(Source: 03-beyond-english.md, Section 3.1; Shi et al., 2022)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1; Shi et al., 2022)*
 
 - **Implementation**: Translate non-English inputs to English before processing
 - **Example Process**:
@@ -374,14 +374,14 @@ Classify the tweet as positive or negative:
 - **When to Use**: For languages where model performance is significantly lower than English
 
 #### **Cross-Lingual Thought (XLT) Prompting**
-*(Source: 03-beyond-english.md, Section 3.1.1; Huang et al., 2023a)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.1; Huang et al., 2023a)*
 
 - **Implementation**: Template with role assignment and cross-lingual thinking
 - **Components**: Six separate instructions including role, cross-lingual thinking, and CoT
 - **When to Use**: For complex reasoning tasks in non-English languages
 
 #### **Cross-Lingual Self Consistent Prompting (CLSP)**
-*(Source: 03-beyond-english.md, Section 3.1.1; Qin et al., 2023a)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.1; Qin et al., 2023a)*
 
 - **Implementation**: Create reasoning paths in different languages for the same question
 - **Process**:
@@ -394,7 +394,7 @@ Classify the tweet as positive or negative:
 ### 3.2 Prompt Template Language Selection
 
 #### **English Template Strategy**
-*(Source: 03-beyond-english.md, Section 3.1.3)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.3)*
 
 - **Approach**: Use English for prompt template even with non-English content
 - **Implementation Example**:
@@ -405,7 +405,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: Often more effective due to English dominance in training data
 
 #### **Native Language Template Strategy**
-*(Source: 03-beyond-english.md, Section 3.1.3)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.3)*
 
 - **Approach**: Use target language for prompt template
 - **Implementation Example**:
@@ -438,7 +438,7 @@ Classify the tweet as positive or negative:
 ### 3.3 Multimodal Prompting Techniques
 
 #### **Image Prompting - Prompt Modifiers**
-*(Source: 03-beyond-english.md, Section 3.2.1; Oppenlaender, 2023)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1; Oppenlaender, 2023)*
 
 - **Implementation**: Append descriptive words to change image generation
 - **Examples**:
@@ -454,7 +454,7 @@ Classify the tweet as positive or negative:
   - **Style**: "photorealistic", "abstract", "minimalist"
 
 #### **Negative Prompting**
-*(Source: 03-beyond-english.md, Section 3.2.1; Schulhoff, 2022)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1; Schulhoff, 2022)*
 
 - **Implementation**: Specify what you don't want in the image
 - **Example**:
@@ -465,7 +465,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: To avoid common generation artifacts in image models
 
 #### **Paired-Image Prompting**
-*(Source: 03-beyond-english.md, Section 3.2.1.1; Wang et al., 2023k)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1.1; Wang et al., 2023k)*
 
 - **Implementation**: Show before/after image pairs to demonstrate transformation
 - **Process**:
@@ -478,7 +478,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: For image editing or style transfer tasks
 
 #### **Image-as-Text Prompting**
-*(Source: 03-beyond-english.md, Section 3.2.1.1; Hakimov and Schlangen, 2023)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1.1; Hakimov and Schlangen, 2023)*
 
 - **Implementation**: Convert images to textual descriptions for text-only models
 - **Example Process**:
@@ -489,7 +489,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Multimodal Chain-of-Thought**
-*(Source: 03-beyond-english.md, Section 3.2.1.2)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1.2)*
 
 - **Implementation**: Apply step-by-step reasoning to image + text inputs
 - **Example**:
@@ -499,7 +499,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Chain-of-Images (CoI)**
-*(Source: 03-beyond-english.md, Section 3.2.1.2; Meng et al., 2023)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.2.1.2; Meng et al., 2023)*
 
 - **Implementation**: Generate images as part of reasoning process
 - **Trigger Phrase**: "Let's think image by image"
@@ -508,7 +508,7 @@ Classify the tweet as positive or negative:
 ### 3.4 Machine Translation Prompting
 
 #### **Chain-of-Dictionary (CoD)**
-*(Source: 03-beyond-english.md, Section 3.1.4; Lu et al., 2023b)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.4; Lu et al., 2023b)*
 
 - **Implementation**: Extract words, provide multilingual definitions, then translate
 - **Example**:
@@ -521,7 +521,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Decomposed Prompting for MT (DecoMT)**
-*(Source: 03-beyond-english.md, Section 3.1.4; Puduppully et al., 2023)*
+*(Source: @docs/prompting/prompt-report/03-beyond-english.md, Section 3.1.4; Puduppully et al., 2023)*
 
 - **Implementation**: Break text into chunks, translate separately, then combine
 - **Process**:
@@ -534,12 +534,12 @@ Classify the tweet as positive or negative:
 ---
 
 ## Section 4: Advanced Extensions - Agents & Evaluation
-*(Source: 04-extensions.md, Sections 4.1-4.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Sections 4.1-4.2)*
 
 ### 4.1 Agent-Based Prompting
 
 #### **Tool Use Agent Pattern**
-*(Source: 04-extensions.md, Section 4.1.1; Karpas et al., 2022)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.1; Karpas et al., 2022)*
 
 - **Definition**: GenAI systems that engage with external systems through prompted actions
 - **Implementation Example**:
@@ -554,7 +554,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: Mathematical computations, factual lookups, complex reasoning requiring external tools
 
 #### **MRKL System (Modular Reasoning, Knowledge, and Language)**
-*(Source: 04-extensions.md, Section 4.1.1; Karpas et al., 2022)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.1; Karpas et al., 2022)*
 
 - **Implementation**: LLM router with access to multiple tools
 - **Pattern**:
@@ -569,7 +569,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **Program-Aided Language Model (PAL)**
-*(Source: 04-extensions.md, Section 4.1.2; Gao et al., 2023b)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.2; Gao et al., 2023b)*
 
 - **Implementation**: Translate problems directly into executable code
 - **Complete Prompt Template**:
@@ -591,7 +591,7 @@ Classify the tweet as positive or negative:
 - **When to Use**: Mathematical, computational, or data analysis problems that benefit from programmatic solutions
 
 #### **ReAct (Reasoning and Acting)**
-*(Source: 04-extensions.md, Section 4.1.3; Yao et al., 2022)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.3; Yao et al., 2022)*
 
 - **Implementation**: Thought → Action → Observation cycle
 - **Pattern**:
@@ -604,7 +604,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **CRITIC (Self-Correcting with Tool-Interactive Critiquing)**
-*(Source: 04-extensions.md, Section 4.1.1; Gou et al., 2024a)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.1; Gou et al., 2024a)*
 
 - **Implementation**: Generate → Critique → Verify with tools → Amend
 - **Process**:
@@ -618,7 +618,7 @@ Classify the tweet as positive or negative:
 ### 4.2 Retrieval Augmented Generation (RAG) Patterns
 
 #### **Demonstrate-Search-Predict**
-*(Source: 04-extensions.md, Section 4.1.4; Khattab et al., 2022)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.4; Khattab et al., 2022)*
 
 - **Implementation**: Decompose → Search → Combine
 - **Pattern**:
@@ -634,7 +634,7 @@ Classify the tweet as positive or negative:
   ```
 
 #### **IRCoT (Interleaved Retrieval guided by Chain-of-Thought)**
-*(Source: 04-extensions.md, Section 4.1.4; Trivedi et al., 2023)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.1.4; Trivedi et al., 2023)*
 
 - **Implementation**: Interleave reasoning and retrieval
 - **Pattern**:
@@ -650,7 +650,7 @@ Classify the tweet as positive or negative:
 ### 4.3 LLM-as-Evaluator Prompting
 
 #### **Basic Evaluation Template**
-*(Source: 04-extensions.md, Section 4.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2)*
 
 - **Implementation**: Role + Criteria + Format + Examples
 - **Template**:
@@ -672,7 +672,7 @@ Classify the tweet as positive or negative:
 #### **Output Formats for Evaluation**
 
 ##### **Linear Scale Format**
-*(Source: 04-extensions.md, Section 4.2.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.2)*
 
 ```
 Score the following story on a scale of 1-5 from well to poorly written:
@@ -682,7 +682,7 @@ Output format: Score: X/5
 ```
 
 ##### **Binary Score Format**
-*(Source: 04-extensions.md, Section 4.2.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.2)*
 
 ```
 Is the following story well written at a high-school level (yes/no)?:
@@ -692,7 +692,7 @@ Output: Yes or No
 ```
 
 ##### **Likert Scale Format**
-*(Source: 04-extensions.md, Section 4.2.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.2)*
 
 ```
 Score the following story according to this scale:
@@ -708,7 +708,7 @@ Output: [Scale level]
 ```
 
 ##### **Structured JSON Format**
-*(Source: 04-extensions.md, Section 4.2.2)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.2)*
 
 ```
 Evaluate the following text and output your assessment in JSON format:
@@ -726,7 +726,7 @@ Output format:
 ```
 
 #### **G-EVAL Framework**
-*(Source: 04-extensions.md, Section 4.2.3; Liu et al., 2023d)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.3; Liu et al., 2023d)*
 
 - **Implementation**: Include auto-generated evaluation steps in prompt
 - **Template**:
@@ -746,7 +746,7 @@ Output format:
   ```
 
 #### **Role-Based Evaluation**
-*(Source: 04-extensions.md, Section 4.2.1; Wu et al., 2023b)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.1; Wu et al., 2023b)*
 
 - **Implementation**: Use different expert roles for diverse perspectives
 - **Example**:
@@ -759,7 +759,7 @@ Output format:
   ```
 
 ### 4.4 Batch Evaluation Prompting
-*(Source: 04-extensions.md, Section 4.2.4)*
+*(Source: @docs/prompting/prompt-report/04-extensions.md, Section 4.2.4)*
 
 - **Implementation**: Evaluate multiple items efficiently (with performance trade-offs)
 - **Template**:
@@ -780,12 +780,12 @@ Output format:
 ---
 
 ## Section 5: Security & Alignment Best Practices
-*(Source: 05-prompting-issues.md, Sections 5.1-5.2)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Sections 5.1-5.2)*
 
 ### 5.1 Security Considerations
 
 #### **Prompt Injection Prevention**
-*(Source: 05-prompting-issues.md, Section 5.1.1)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.1.1)*
 
 - **Problem**: Users can override developer instructions in prompt templates
 - **Vulnerable Example**:
@@ -817,7 +817,7 @@ Output format:
   ```
 
 #### **Prompt Leaking Prevention**
-*(Source: 05-prompting-issues.md, Section 5.1.2.1; Willison, 2022)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.1.2.1; Willison, 2022)*
 
 - **Problem**: Users can extract prompt templates
 - **Attack Example**:
@@ -835,7 +835,7 @@ Output format:
   ```
 
 #### **Jailbreaking Mitigation**
-*(Source: 05-prompting-issues.md, Section 5.1.1)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.1.1)*
 
 - **Problem**: Users attempt to bypass safety guidelines
 - **Defensive Prompting**:
@@ -853,7 +853,7 @@ Output format:
 ### 5.2 Alignment and Robustness
 
 #### **Prompt Sensitivity Mitigation**
-*(Source: 05-prompting-issues.md, Section 5.2.1)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.1)*
 
 - **Problem**: Small changes cause major output variations
 - **Best Practices**:
@@ -884,7 +884,7 @@ Output format:
   ```
 
 #### **Overconfidence and Calibration**
-*(Source: 05-prompting-issues.md, Section 5.2.2)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.2)*
 
 - **Problem**: Models express false confidence
 - **Calibration Techniques**:
@@ -912,7 +912,7 @@ Output format:
   ```
 
 #### **Sycophancy Prevention**
-*(Source: 05-prompting-issues.md, Section 5.2.2; Sharma et al., 2023)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.2; Sharma et al., 2023)*
 
 - **Problem**: Models agree with user opinions regardless of accuracy
 - **Anti-Sycophancy Prompting**:
@@ -939,10 +939,10 @@ Output format:
   ```
 
 #### **Bias and Stereotype Mitigation**
-*(Source: 05-prompting-issues.md, Section 5.2.3)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.3)*
 
 - **Vanilla Prompting (Moral Self-Correction)**:
-  *(Source: 05-prompting-issues.md, Section 5.2.3; Si et al., 2023b)*
+  *(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.3; Si et al., 2023b)*
   ```
   Provide fair, unbiased responses that do not perpetuate stereotypes or discrimination.
   Consider diverse perspectives and avoid assumptions based on protected characteristics.
@@ -951,7 +951,7 @@ Output format:
   ```
 
 - **Balanced Demonstrations**:
-  *(Source: 05-prompting-issues.md, Section 5.2.3; Si et al., 2023b)*
+  *(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.3; Si et al., 2023b)*
   ```
   When providing examples, ensure they represent diverse demographics, cultures, and perspectives.
   
@@ -963,7 +963,7 @@ Output format:
   ```
 
 - **Cultural Awareness**:
-  *(Source: 05-prompting-issues.md, Section 5.2.3; Yao et al., 2023a)*
+  *(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.3; Yao et al., 2023a)*
   ```
   Consider cultural context and adapt responses appropriately.
   When discussing cultural topics, use culturally relevant and respectful language.
@@ -973,10 +973,10 @@ Output format:
   ```
 
 #### **Ambiguity Resolution**
-*(Source: 05-prompting-issues.md, Section 5.2.4)*
+*(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.4)*
 
 - **Question Clarification Pattern**:
-  *(Source: 05-prompting-issues.md, Section 5.2.4; Zhang and Choi, 2023)*
+  *(Source: @docs/prompting/prompt-report/05-prompting-issues.md, Section 5.2.4; Zhang and Choi, 2023)*
   ```
   Step 1: Analyze the question for ambiguity
   Step 2: If ambiguous, ask clarifying questions before proceeding
@@ -1016,10 +1016,10 @@ Based on the security and alignment issues identified, here's a practical checkl
 ---
 
 ## Section 6: Benchmarking & Prompt Engineering Process
-*(Source: 06-benchmarking.md, Sections 6.1-6.2)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Sections 6.1-6.2)*
 
 ### 6.1 Technique Performance Insights
-*(Source: 06-benchmarking.md, Section 6.1)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.1)*
 
 #### **Benchmarking Results on MMLU**
 Key findings from testing 6 prompting techniques on 2,800 MMLU questions with GPT-3.5-turbo:
@@ -1030,7 +1030,7 @@ Key findings from testing 6 prompting techniques on 2,800 MMLU questions with GP
 - **Self-Consistency Benefits**: Only improved accuracy for Zero-Shot prompts, not complex techniques
 
 #### **Question Format Impact**
-*(Source: 06-benchmarking.md, Section 6.1.2; Sclar et al., 2023b)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.1.2; Sclar et al., 2023b)*
 
 Different formatting choices significantly affect results:
 
@@ -1057,7 +1057,7 @@ PROBLEM: {QUESTION}, OPTIONS:
 - **Actionable Insight**: Test multiple formats during development; small formatting changes can significantly impact performance
 
 ### 6.2 Real-World Prompt Engineering Process
-*(Source: 06-benchmarking.md, Section 6.2)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2)*
 
 #### **Systematic Development Methodology**
 
@@ -1090,7 +1090,7 @@ Based on a 47-step, 20-hour real-world case study (suicide risk detection):
 #### **Practical Prompt Engineering Templates**
 
 ##### **Zero-Shot + Context Baseline**
-*(Source: 06-benchmarking.md, Section 6.2.3.3)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2.3.3)*
 
 ```
 {DOMAIN_DEFINITION}
@@ -1101,7 +1101,7 @@ Is this {CLASSIFICATION_TARGET}? Yes or no.
 ```
 
 ##### **10-Shot + Context Pattern**
-*(Source: 06-benchmarking.md, Section 6.2.3.3)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2.3.3)*
 
 ```
 {DOMAIN_DEFINITION}
@@ -1117,7 +1117,7 @@ A:
 ```
 
 ##### **AutoDiCoT (Automatic Directed CoT)**
-*(Source: 06-benchmarking.md, Section 6.2.3.3)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2.3.3)*
 
 **Key Concept**: Show what NOT to do by providing incorrect reasoning examples with corrections.
 
@@ -1143,7 +1143,7 @@ Think carefully and avoid similar mistakes.
 **When to Use**: When your model consistently makes the same type of logical errors.
 
 ### 6.3 Answer Extraction Strategies
-*(Source: 06-benchmarking.md, Section 6.1.5)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.1.5)*
 
 #### **Multiple Extraction Methods**
 Test different approaches and use the best-performing:
@@ -1174,14 +1174,14 @@ Mark answers as correct if they follow patterns like:
 ### 6.4 Performance Optimization Lessons
 
 #### **Context Optimization**
-*(Source: 06-benchmarking.md, Section 6.2.3.3)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2.3.3)*
 
 - **Rich Context**: Including background emails/documents significantly improved performance
 - **Duplication Effects**: Accidentally duplicating context improved performance (similar to re-reading technique)
 - **Domain Expertise**: Regular engagement with domain experts prevents prompt divergence from real goals
 
 #### **Model Selection Considerations**
-*(Source: 06-benchmarking.md, Section 6.2.3.2)*
+*(Source: @docs/prompting/prompt-report/06-benchmarking.md, Section 6.2.3.2)*
 
 - **Safety Restrictions**: Some models refuse sensitive tasks; consider alternative models
 - **Task-Specific Performance**: Model choice affects more than just quality metrics
@@ -1217,25 +1217,25 @@ Mark answers as correct if they follow patterns like:
 ---
 
 ## Section 7: Essential Vocabulary & Concepts
-*(Source: A-appendices.md, Section A.2)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2)*
 
 ### 7.1 Core Prompt Types
 
 #### **System Prompt**
-*(Source: A-appendices.md, Section A.2.4.1)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.4.1)*
 - **Definition**: High-level instructions for LLM interaction with users
 - **Usage**: Set behavioral guidelines, roles, and constraints
 - **Implementation**: Usually set once per conversation/session
 - **Note**: Not all models support system prompts
 
 #### **User Prompt** 
-*(Source: A-appendices.md, Section A.2.4.1)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.4.1)*
 - **Definition**: The prompt that comes from the user
 - **Usage**: Most common form in consumer applications
 - **Implementation**: Direct user input or templated user requests
 
 #### **Priming**
-*(Source: A-appendices.md, Section A.2.1; Schulhoff, 2022)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.1; Schulhoff, 2022)*
 - **Definition**: Initial prompt that establishes instructions for rest of conversation
 - **Usage**: Set role, tone, constraints, or interaction style
 - **Implementation**: Can be done in system or user prompt
@@ -1244,19 +1244,19 @@ Mark answers as correct if they follow patterns like:
 ### 7.2 Technical Concepts
 
 #### **Context Window**
-*(Source: A-appendices.md, Section A.2.1)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.1)*
 - **Definition**: The space of tokens the model can process at once
 - **Limitation**: Has maximal length (context length)
 - **Practical Impact**: Determines how much information you can include in prompts
 
 #### **Hard vs Soft Prompts**
-*(Source: A-appendices.md, Section A.2.4.2)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.4.2)*
 - **Hard (Discrete) Prompts**: Only contain tokens corresponding to actual vocabulary words
 - **Soft (Continuous) Prompts**: May contain tokens not in vocabulary (used in fine-tuning)
 - **Actionable Note**: This guide focuses on hard prompts which practitioners can directly implement
 
 ### 7.3 Conversational Prompt Engineering
-*(Source: A-appendices.md, Section A.2.2)*
+*(Source: @docs/prompting/prompt-report/A-appendices.md, Section A.2.2)*
 - **Definition**: Prompt engineering during a conversation rather than crafting new prompts
 - **Implementation**: Ask model to refine output within ongoing conversation
 - **Common Refinement Patterns**:
@@ -1293,10 +1293,10 @@ Mark answers as correct if they follow patterns like:
 ---
 
 ## Section 8: General Recommendations
-*(Source: 08-conclusions.md)*
+*(Source: @docs/prompting/prompt-report/08-conclusions.md)*
 
 ### 8.1 For Prompt Engineering Beginners
-*(Source: 08-conclusions.md)*
+*(Source: @docs/prompting/prompt-report/08-conclusions.md)*
 
 1. **Understand the Problem**: Focus on the actual problem rather than just input/output and benchmark scores
 2. **Validate Data and Metrics**: Ensure they represent your real problem accurately  
@@ -1305,7 +1305,7 @@ Mark answers as correct if they follow patterns like:
 5. **Test Transferability**: Techniques may not work across different models, problems, or datasets
 
 ### 8.2 For Experienced Practitioners
-*(Source: 08-conclusions.md)*
+*(Source: @docs/prompting/prompt-report/08-conclusions.md)*
 
 1. **Use Taxonomy**: Situate new methods within established frameworks
 2. **Include Case Studies**: Provide ecologically valid examples of techniques in practice
@@ -1313,7 +1313,7 @@ Mark answers as correct if they follow patterns like:
 4. **Focus on Practical Application**: Prioritize real-world validity over benchmark performance
 
 ### 8.3 Key Warnings
-*(Source: 08-conclusions.md)*
+*(Source: @docs/prompting/prompt-report/08-conclusions.md)*
 
 - **Evaluation Variability**: The field lacks standardized evaluation methods
 - **Input Sensitivity**: Model outputs are sensitive to meaning-preserving input changes  
