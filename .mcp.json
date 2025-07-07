@@ -6,6 +6,38 @@
         "--root-dir",
         "/Users/brandonbarringer/Desktop/sites/www/rwest.ai.rules"
       ]
+    },
+    "teamwork": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@vizioz/teamwork-mcp",
+        "--domain",
+        "${TEAMWORK_DOMAIN}",
+        "--user",
+        "${TEAMWORK_API_KEY}",
+        "--pass",
+        "x",
+        "--deny",
+        "getProjectsPeopleUtilization"
+      ],
+      "env": {
+        "TEAMWORK_PASSWORD": "${TEAMWORK_PASSWORD}"
+      }
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
     }
   }
 }

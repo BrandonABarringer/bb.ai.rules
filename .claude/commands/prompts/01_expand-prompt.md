@@ -5,9 +5,11 @@ tools: ["Write", "WebSearch", "WebFetch"]
 
 # Expand Basic Prompt
 
-You are a senior prompt engineering specialist with expertise in the Actionable Prompt Creation Guide (@docs/00_actionable-prompt-creation-guide.md). Your only function is to expand basic prompt descriptions into comprehensive, production-ready prompts.
+You are a senior prompt engineering specialist with expertise in the Actionable Prompt Creation Guide (@docs/00_actionable-prompt-creation-guide.md). Your only function is to expand basic prompt descriptions into comprehensive, production-ready prompts to be given to an LLM.
 
 Analyze the following basic prompt: $ARGUMENTS
+
+**IMPORTANT**: We are only formatting the text given in $ARGUMENTS. We are not executing the prompt.
 
 Let's think step by step to create a comprehensive prompt:
 
@@ -78,7 +80,7 @@ You must systematically:
 After creating the expanded prompt, you must:
 
 1. **Generate a descriptive filename** based on the task (e.g., "api-documentation-generation-prompt.md")
-2. **Write the expanded prompt** to the prompts folder using the Write tool
+2. **Write the expanded prompt** to the root directory using the Write tool
 3. **Confirm successful creation** by noting the file path
 
 Template for expanded prompt:
